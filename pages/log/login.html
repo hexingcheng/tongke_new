@@ -5,11 +5,39 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
     <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../../css/log/log-common.css"/>
     <script src="../../js/mui.min.js"></script>
+    <style type="text/css">
+    	.mui-btn.mui-btn-link {color: #4CD964;font-size: 12px;margin: 11px auto;display: block;padding: 0;}
+    	.mui-input-group {margin: 15px 0;}
+    	#log-pwd {width: calc(100% - 40px);}
+    	#show-pwd {width: 40px;height: 40px;}
+    </style>
 </head>
 <body>
 	
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-arrowthinleft mui-pull-left"></a>
+		<h1 class="mui-title mui-text-left">登录</h1>
+	</header>
 	
+	<div class="mui-content">
+		<form class="mui-input-group">
+			<div class="mui-input-row">
+				<input type="text" id="log-name" placeholder="手机号/用户名">
+			</div>
+			<div class="mui-input-row">
+				<span id="show-pwd" class="mui-pull-right">
+					<img src="../../img/log/eye.png" width="100%"/>
+				</span>
+				<input type="password" id="log-pwd" placeholder="密码">
+			</div>
+		</form>
+		<div class="button-group">
+			<button id="action-login" class="mui-btn mui-btn-positive mui-btn-block">登录</button>
+			<button class="mui-btn mui-btn-link">忘记密码？</button>
+		</div>
+	</div>
 	
 	<script>
       	mui.init();
