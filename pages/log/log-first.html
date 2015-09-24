@@ -5,11 +5,34 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
     <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/log/log-common.css"/>
     <script src="../../js/mui.min.js"></script>
+    <style type="text/css">
+    	.logo-wrap {position: relative;top: 100px;}
+    	.log-box {width: 100px; height: 100px;margin: 0 auto;overflow: hidden;border-radius: 50%;}
+    	.app-name {font-size: 22px;color: #869226;font-weight: bold;padding-top: 15px;}
+    	.log-wrap {position: absolute;width: 100%;bottom: 0px;}
+    	.plain {font-size: 14px;color: #666;padding: 10px 0 20px 0;}
+    </style>
 </head>
 <body>
 	
-	
+	<div class="mui-content">
+		<div class="logo-wrap">
+			<div class="log-box">
+				<img src="../../img/log/logo.png" width="100%"/>
+			</div>
+			<div class="app-name mui-text-center">同客</div>
+		</div>
+		<div class="log-wrap">
+			<div class="button-group">
+				<button id="action-login" class="mui-btn mui-btn-positive mui-btn-block">登录</button>
+				<div class="plain mui-text-center">使用手机号/用户名登陆</div>
+				<button id="action-login" class="mui-btn mui-btn-positive mui-btn-block mui-btn-outlined">注册</button>
+				<div class="plain mui-text-center">请使用手机号注册</div>
+			</div>
+		</div>
+	</div>
 	
 	<script>
       	mui.init();
