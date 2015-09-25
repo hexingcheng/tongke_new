@@ -80,6 +80,12 @@ function innerAjax(options,successcb,errorcb) {
 		}
 	})
 }
+	function getwebid(url){
+		var start = url.lastIndexOf('/');
+		var end = url.indexOf('.html');
+		var pageid = url.substring(start + 1, end);
+		return pageid;
+	}
 function copyobj(from,to){
 	for(var i in from){
 		if(typeof from[i]=='object'){
@@ -88,4 +94,17 @@ function copyobj(from,to){
 			to[i]=from[i];
 		}
 	}
+}
+
+function preload(webArr,cb){
+	var len  = webArr.length;
+	for(var i = 0;i<len;i++){
+		var pageid = getwebid(webArr[i]);
+		var temppage = 'page'+i;
+		temppage = mui.preload({
+			url:webArr[i],
+			id:pageid
+		})
+	}
+	cb&&cb();
 }
