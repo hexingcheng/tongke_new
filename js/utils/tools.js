@@ -89,3 +89,38 @@ function copyobj(from,to){
 		}
 	}
 }
+
+// 打开窗口
+function openWindow(url, param, aniType, aniTime){
+	// 通过url获取当前id
+	function getwebid(url){
+		var start = url.lastIndexOf('/');
+		var end = url.indexOf('.html');
+		var pageid = url.substring(start + 1, end);
+		return pageid;
+	}
+	
+	if (window.plus) {
+		mui.openWindow({
+			id: getwebid(url),
+			url: url,
+			extras: param || {},
+			show: {
+				autoShow: true,
+				aniShow: aniType || "slide-in-right",
+				duration: aniTime || 300
+			},
+			waiting: {
+				autoShow: false,
+				title: '正在加载...',
+				options: {
+					background: '#d1d1d1',
+					width : 100,
+					height : 100
+				}
+			}
+		})
+	} else {
+		alert('system is not ready')
+	}
+}
