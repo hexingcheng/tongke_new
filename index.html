@@ -9,25 +9,7 @@
 		<title></title>
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
-		<style>
-			.mui-bar .mui-title {
-				text-align: left;
-				right: 20px;
-				left: 20px;
-				color: #FFFFFF;
-				font-size: 20px;
-			}
-			#header {
-				background-color: #39bf9e;
-			}
-			.mui-bar-tab .mui-tab-item.mui-active {
-				color: #39bf9e;
-			}
-			#header a {
-				color: #FFFFFF;
-				font-weight: bolder;
-			}
-		</style>
+		<link rel="stylesheet" href="css/public/public.css" />
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav" id="header">
@@ -49,7 +31,7 @@
 				</span>
 				<span class="mui-tab-label">消息</span>
 			</a>
-			<a class="mui-tab-item" href="./pages/find/findpage.html" data-right-icon='mui-icon mui-icon-search mui-pull-right' data-riconforword='./pages/find.findsearch.html'>
+			<a class="mui-tab-item" href="./pages/find/findpage.html" data-right-icon='mui-icon mui-icon-search mui-pull-right' data-riconforword='./pages/find/findsearch.html'>
 				<span class="mui-icon mui-icon-navigate"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
@@ -85,6 +67,13 @@
 					}
 					self.append(sub);
 				}
+				var preloads = [];
+				var item = document.querySelectorAll('.mui-tab-item');
+				var len = item.length;
+				for(var i = 0;i<len;i++){
+					preloads.push(item[i].getAttribute('data-riconforword'))
+				}
+				preload(preloads);
 			});
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
@@ -116,7 +105,8 @@
 			mui('#header').on('tap','#rightbtn',function(){
 				var url = this.getAttribute('data-forword')
 				var pageid = getwebid(url);
-				mui.openWindow(url,pageid);
+//				mui.openWindow(url,pageid);
+				plus.webview.getWebviewById(pageid).show('slide-in-right',300)
 			})
 			mui.back = function() {
 				if (!first) {
