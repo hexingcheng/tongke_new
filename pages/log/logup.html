@@ -14,13 +14,10 @@
     	#add-headimg {position: absolute;right: 0px;bottom: 0px;font-size: 18px;font-weight: bold;color: burlywood;}
     	#show-pwd-one,
     	#show-pwd-two {width: 40px;height: 40px;}
-    	#pwd,
-    	#conform-pwd {width: calc(100% - 40px);}
     	.divide-top {margin-top: 10px;}
     	.button-group {margin-top: 20px;}
     	.code-wrap {width: 100px;height: 40px;box-sizing: border-box;padding: 7px 10px 7px 0;}
     	#get-code {width: 90px;padding: 0;height: 26px;font-size: 13px;}
-    	#code {width: calc(100% - 100px);}
     	#type {margin-bottom: 0;padding: 0 15px;width: 100%;color: #aaa;border-radius: 0;}
     	.code-box {margin-right: 100px;}
     </style>
@@ -45,7 +42,7 @@
 				</div>
 				<div class="mui-input-group">
 					<div class="mui-input-row">
-						<input type="text" id="nickname" placeholder="用户名">
+						<input type="text" id="nickname" placeholder="用户名" maxlength="">
 					</div>
 					<div class="mui-input-row">
 						<select id="type" class="type-select mui-text-left">
@@ -99,6 +96,7 @@
       	mui.plusReady(function(){
       		mui(".mui-scroll-wrapper").scroll();
       		
+      		// 
       		
       		
       	})
