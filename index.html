@@ -9,51 +9,38 @@
 		<title></title>
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
-		<style>
-			.mui-bar .mui-title{
-				text-align: left;
-				right: 20px;
-				left: 20px;
-				color: #FFFFFF;
-				font-size: 20px;
-			}
-			#header{
-				background-color:#39bf9e;
-			}
-			.mui-bar-tab .mui-tab-item.mui-active{
-				color: #39bf9e;
-			}
-		</style>
+		<link rel="stylesheet" href="css/public/public.css" />
 	</head>
-
 	<body>
 		<header class="mui-bar mui-bar-nav" id="header">
 			<h1 class="mui-title" id="title">同客</h1>
+			<a class="mui-icon mui-icon-compose mui-pull-right" id="rightbtn" data-forword = './pages/indexpage/newactivity.html'></a>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
-			<a id="defaultTab" class="mui-tab-item mui-active" href="./pages/indexpage/active.html">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="./pages/indexpage/active.html" data-right-icon='mui-icon mui-icon-compose mui-pull-right' data-riconforword='./pages/indexpage/newactivity.html'>
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">同客</span>
 			</a>
-			<a class="mui-tab-item" href="./pages/friends/friendspage.html">
+			<a class="mui-tab-item" href="./pages/friends/friendspage.html" data-right-icon='mui-icon mui-icon-personadd mui-pull-right' data-riconforword='./pages/friends/addfriend.html'>
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">人脉</span>
 			</a>
-			<a class="mui-tab-item" href="./pages/messages/msgpage.html">
-				<span class="mui-icon mui-icon-email">
+			<a class="mui-tab-item" href="./pages/messages/msgpage.html" data-right-icon='mui-icon mui-icon-chatbubble mui-pull-right' data-riconforword='./pages/messages/newmsg.html'>
+				<span class="mui-icon mui-icon-chat">
 					<!--<span class="mui-badge">1</span>-->
 				</span>
 				<span class="mui-tab-label">消息</span>
 			</a>
-			<a class="mui-tab-item" href="./pages/find/findpage.html">
-				<span class="mui-icon mui-icon-gear"></span>
+			<a class="mui-tab-item" href="./pages/find/findpage.html" data-right-icon='mui-icon mui-icon-search mui-pull-right' data-riconforword='./pages/find/findsearch.html'>
+				<span class="mui-icon mui-icon-navigate"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
-			<a class="mui-tab-item" href="./pages/myself/myselfpage.html">
-				<span class="mui-icon mui-icon-gear"></span>
+			<a class="mui-tab-item" href="./pages/myself/myselfpage.html" data-right-icon='mui-pull-right' data-riconforword=''>
+				<span class="mui-icon mui-icon-person"></span>
 				<span class="mui-tab-label">我</span>
 			</a>
 		</nav>
+		<script type="text/javascript" src="js/utils/tools.js" ></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 			var subpages = ['./pages/indexpage/active.html', './pages/friends/friendspage.html', './pages/messages/msgpage.html', './pages/find/findpage.html', './pages/myself/myselfpage.html'];
@@ -62,7 +49,7 @@
 				bottom: '50px'
 			};
 			var aniShow = {};
-			
+			var first = null;
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
@@ -70,53 +57,71 @@
 					var temp = {};
 					var start = subpages[i].lastIndexOf('/');
 					var end = subpages[i].indexOf('.html');
-					var pageid = subpages[i].substring(start+1,end);
+					var pageid = subpages[i].substring(start + 1, end);
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
 					if (i > 0) {
 						sub.hide();
-					}else{
+					} else {
 						temp[subpages[i]] = "true";
-						mui.extend(aniShow,temp);
+						mui.extend(aniShow, temp);
 					}
 					self.append(sub);
 				}
+				var preloads = [];
+				var item = document.querySelectorAll('.mui-tab-item');
+				var len = item.length;
+				for(var i = 0;i<len;i++){
+					preloads.push(item[i].getAttribute('data-riconforword'))
+				}
+				preload(preloads);
 			});
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
 			 //选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				var forword = this.getAttribute('data-riconforword');
 				var targetTab = this.getAttribute('href');
 				if (targetTab == activeTab) {
 					return;
 				}
 				//更换标题
 				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+				document.getElementById('rightbtn').className = this.getAttribute('data-right-icon');
+				document.getElementById('rightbtn').setAttribute('data-forword',forword);
 				//显示目标选项卡
-				if(mui.os.ios||aniShow[targetTab]){
+				if (mui.os.ios || aniShow[targetTab]) {
 					plus.webview.show(targetTab);
-				}else{
+				} else {
 					var temp = {};
 					temp[targetTab] = "true";
-					mui.extend(aniShow,temp);
-					plus.webview.show(targetTab,"fade-in",300);
+					mui.extend(aniShow, temp);
+					plus.webview.show(targetTab, "fade-in", 300);
 				}
 				//隐藏当前;
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
 			});
-			 //自定义事件，模拟点击“首页选项卡”
-			document.addEventListener('gohome', function() {
-				var defaultTab = document.getElementById("defaultTab");
-				//模拟首页点击
-				mui.trigger(defaultTab, 'tap');
-				//切换选项卡高亮
-				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-				if (defaultTab !== current) {
-					current.classList.remove('mui-active');
-					defaultTab.classList.add('mui-active');
+			mui('#header').on('tap','#rightbtn',function(){
+				var url = this.getAttribute('data-forword')
+				var pageid = getwebid(url);
+//				mui.openWindow(url,pageid);
+				plus.webview.getWebviewById(pageid).show('slide-in-right',300)
+			})
+			mui.back = function() {
+				if (!first) {
+					first = new Date().getTime();
+					mui.toast('再按一次退出应用');
+					setTimeout(function() {
+						first = null;
+					}, 1000);
+				} else {
+					if (new Date().getTime() - first < 1000) {
+						plus.runtime.quit();
+					}
 				}
-			});
+			};
+			 //自定义事件，模拟点击“首页选项卡”
 		</script>
 	</body>
 

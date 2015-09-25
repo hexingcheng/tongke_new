@@ -1,0 +1,17 @@
+.mui-bar .mui-title {
+	text-align: left;
+	right: 20px;
+	left: 20px;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+#header {
+	background-color: #39bf9e;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+	color: #39bf9e;
+}
+#header a {
+	color: #FFFFFF;
+	font-weight: bolder;
+}
