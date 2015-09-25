@@ -8,34 +8,47 @@
     <link rel="stylesheet" href="../../css/log/log-common.css"/>
     <script src="../../js/mui.min.js"></script>
     <style type="text/css">
-    	.logo-wrap {position: relative;top: 100px;}
+    	.logo-wrap {position: absolute;top: 0;bottom: 186px;width: 100%;}
     	.log-box {width: 100px; height: 100px;margin: 0 auto;overflow: hidden;border-radius: 50%;}
-    	.app-name {font-size: 22px;color: #4cd964;font-weight: bold;padding-top: 15px;}
+    	.app-name {font-size: 22px;color: #39bf9e;font-weight: 600;padding-top: 15px;}
     	.log-wrap {position: absolute;width: 100%;bottom: 0px;}
     	.plain {font-size: 14px;color: #666;padding: 10px 0 20px 0;}
+    	.logo-box {position: relative;top: 110px;}
     </style>
 </head>
 <body>
 	
 	<div class="mui-content">
 		<div class="logo-wrap">
-			<div class="log-box">
-				<img src="../../img/log/logo.png" width="100%"/>
+			<div class="logo-box">
+				<div class="log-box">
+					<img src="../../img/log/logo.png" width="100%"/>
+				</div>
+				<div class="app-name mui-text-center">同客</div>
 			</div>
-			<div class="app-name mui-text-center">同客</div>
 		</div>
 		<div class="log-wrap">
 			<div class="button-group">
-				<button id="action-login" class="mui-btn mui-btn-positive mui-btn-block">登录</button>
+				<button id="action-login" class="mui-btn btn-color mui-btn-block">登录</button>
 				<div class="plain mui-text-center">使用手机号/用户名登陆</div>
-				<button id="action-login" class="mui-btn mui-btn-positive mui-btn-block mui-btn-outlined">注册</button>
+				<button id="action-logup" class="mui-btn btn-color mui-btn-block mui-btn-outlined">注册</button>
 				<div class="plain mui-text-center">请使用手机号注册</div>
 			</div>
 		</div>
 	</div>
-	
+	<script src="../../js/utils/tools.js"></script>
 	<script>
       	mui.init();
+      	mui.plusReady(function(){
+      		// 登录
+      		document.getElementById("action-login").addEventListener("tap", function(){
+      			openWindow("./login.html")
+      		})
+      		// 注册
+      		document.getElementById("action-logup").addEventListener("tap", function(){
+      			openWindow("./logup.html")
+      		})
+      	})
     </script>
 </body>
 </html>

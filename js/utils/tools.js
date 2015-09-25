@@ -108,3 +108,31 @@ function preload(webArr,cb){
 	}
 	cb&&cb();
 }
+// 打开窗口
+function openWindow(url, param, aniType, aniTime){
+	// 通过url获取当前id
+	
+	if (window.plus) {
+		mui.openWindow({
+			id: getwebid(url),
+			url: url,
+			extras: param || {},
+			show: {
+				autoShow: true,
+				aniShow: aniType || "slide-in-right",
+				duration: aniTime || 300
+			},
+			waiting: {
+				autoShow: false,
+				title: '正在加载...',
+				options: {
+					background: '#d1d1d1',
+					width : 100,
+					height : 100
+				}
+			}
+		})
+	} else {
+		alert('system is not ready')
+	}
+}

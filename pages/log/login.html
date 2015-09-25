@@ -8,9 +8,8 @@
     <link rel="stylesheet" type="text/css" href="../../css/log/log-common.css"/>
     <script src="../../js/mui.min.js"></script>
     <style type="text/css">
-    	.mui-btn.mui-btn-link {color: #4CD964;font-size: 12px;margin: 11px auto;display: block;padding: 0;}
+    	.mui-btn.mui-btn-link {width: 70px;height: 20px;color: #39bf9e;font-size: 12px;margin: 11px auto;display: block;padding: 0;}
     	.mui-input-group {margin: 15px 0;}
-    	#log-pwd {width: calc(100% - 40px);}
     	#show-pwd {width: 40px;height: 40px;}
     </style>
 </head>
@@ -30,11 +29,13 @@
 				<span id="show-pwd" class="mui-pull-right">
 					<img src="../../img/log/eye.png" width="100%"/>
 				</span>
-				<input type="password" id="log-pwd" placeholder="密码">
+				<div class="input-box">
+					<input type="password" id="log-pwd" placeholder="密码">
+				</div>
 			</div>
 		</form>
 		<div class="button-group">
-			<button id="action-login" class="mui-btn mui-btn-positive mui-btn-block">登录</button>
+			<button id="action-login" class="mui-btn btn-color mui-btn-block">登录</button>
 			<button class="mui-btn mui-btn-link">忘记密码？</button>
 		</div>
 	</div>
