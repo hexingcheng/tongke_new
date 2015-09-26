@@ -41,6 +41,7 @@
 			</a>
 		</nav>
 		<script type="text/javascript" src="js/utils/tools.js" ></script>
+		<script type="text/javascript" src="js/libs/jquery.min.js" ></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 			var subpages = ['./pages/indexpage/active.html', './pages/friends/friendspage.html', './pages/messages/msgpage.html', './pages/find/findpage.html', './pages/myself/myselfpage.html'];
@@ -52,6 +53,7 @@
 			var first = null;
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+				iflog();
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 5; i++) {
 					var temp = {};
@@ -74,6 +76,7 @@
 					preloads.push(item[i].getAttribute('data-riconforword'))
 				}
 				preload(preloads);
+				
 			});
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
@@ -102,6 +105,11 @@
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
 			});
+			window.addEventListener('hideHead',function(){
+				$('header').css({
+					'background-color':'red'
+				})
+			})
 			mui('#header').on('tap','#rightbtn',function(){
 				var url = this.getAttribute('data-forword')
 				var pageid = getwebid(url);

@@ -12,7 +12,28 @@ function Ajax(options, successcb, errorcb, nonetworkcb) {
 		}
 	}
 }
-
+function iflog(){
+	var userinfo = JSON.parse(plus.storage.getItem('userinfo'));
+	if(userinfo){
+		var phone = userinfo.mobile;
+		var pwd = userinfo.password;
+		var data = {
+			username:phone,
+			password:pwd
+		}
+		Ajax({
+			url:'/members/logins',
+			data:data
+		},function(data){
+			alert('login success')
+		},function(){
+			alert('something error')
+		})
+	}else{
+		openWindow('./pages/log/log-first.html')
+	}
+	
+}
 function innerAjax(options, successcb, errorcb) {
 	var op = {
 		dataType: 'json',
@@ -40,40 +61,6 @@ function innerAjax(options, successcb, errorcb) {
 			} else if (data.status == 'errors') {
 				errorcb(data);
 			}
-			//			if (data.ret == 1) {
-			//				successcb(data);
-			//			} else if (data.ret == -101) {
-			//				if(getstorage('token')){
-			//					var token = getstorage('token');
-			//					mui.ajax(BASEURL+'auth/activate',{
-			//						type:'post',
-			//						data:{
-			//							token:token
-			//						},
-			//						success:function(data){
-			//							if(data.ret==1){
-			//								innerAjax(options,successcb,errorcb);
-			//							}else if(data.ret==-1){
-			//								mui.toast('身份校验异常,请重新登录');
-			//								mui.ajax(BASEURL+'auth/out',{
-			//									type:'get',
-			//									success:function(){
-			//										openWindow('./page/logupin/login.html')
-			//									}
-			//								})
-			//							}
-			//						}
-			//					})
-			//				} else {
-			//					openWindow('./page/logupin/login.html');
-			//				}
-			//			} else{
-			//				if(op.wait){
-			//					plus.nativeUI.closeWaiting()
-			//				}
-			//				successcb(data);
-			//
-			//			}
 		},
 		error: function(data) {
 			if (op.wait) {
