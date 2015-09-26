@@ -36,9 +36,9 @@ function innerAjax(options, successcb, errorcb) {
 				plus.nativeUI.closeWaiting();
 			}
 			if (data.status == 'success') {
-				successcb()
+				successcb(data)
 			} else if (data.status == 'errors') {
-				errorcb();
+				errorcb(data);
 			}
 			//			if (data.ret == 1) {
 			//				successcb(data);

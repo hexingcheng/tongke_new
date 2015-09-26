@@ -10,7 +10,7 @@
     <style type="text/css">
     	.mui-btn.mui-btn-link {width: 70px;height: 20px;color: #39bf9e;font-size: 12px;margin: 11px auto;display: block;padding: 0;}
     	.mui-input-group {margin: 15px 0;}
-    	#show-pwd {width: 40px;height: 40px;}
+    	.show-pwd {width: 40px;height: 40px;}
     </style>
 </head>
 <body>
@@ -25,9 +25,10 @@
 			<div class="mui-input-row">
 				<input type="text" id="log-name" placeholder="手机号/用户名">
 			</div>
-			<div class="mui-input-row">
-				<span id="show-pwd" class="mui-pull-right">
-					<img src="../../img/log/eye.png" width="100%"/>
+			<div class="mui-input-row pwd-input">
+				<span class="mui-pull-right show-pwd">
+					<img src="../../img/log/eye.png" class="eye-one" width="100%"/>
+					<img src="../../img/log/1182351.png" class="eye-two" width="100%"/>
 				</span>
 				<div class="input-box">
 					<input type="password" id="log-pwd" placeholder="密码">
@@ -39,9 +40,78 @@
 			<button class="mui-btn mui-btn-link">忘记密码？</button>
 		</div>
 	</div>
-	
+	<script src="../../js/libs/jquery.min.js"></script>
+	<script src="../../js/utils/tools.js"></script>
 	<script>
       	mui.init();
+      	mui.ready(function(){
+      		// 控制密码显示与隐藏
+			$('.show-pwd').on('click',function(){
+				var $this = $(this);
+            	var one = $this.find(".eye-one");
+            	var two = $this.find(".eye-two");
+            	var $input = $this.parent(".pwd-input").find("input");
+            	if(one.css("display") == "block"){
+            		one.css("display", "none");
+            		two.css("display", "block");
+            		$input.attr("type","text");
+            	} else {
+            		one.css("display", "block");
+            		two.css("display", "none");
+            		$input.attr("type","password");
+            	}
+			})
+			
+			// 登录
+			$("#action-login").on("click",function(){
+				var nickname = formateval($("#log-name").val());
+				var pwd = formateval($("#log-pwd").val());
+				if(!nickname || nickname.length < 2 || nickname.length > 11){
+					mui.toast("请输入合法的用户名")
+					$("#log-name").val("");
+					return;
+				}
+				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
+				if(pwd.length < 6 || !repw.test(pwd)){
+					mui.toast("请确定密码输入合法");
+					$("#log-pwd").val("");
+					return;
+				}
+				var info = {
+					username : nickname,
+					password : pwd
+				}
+				login(info, function(data, infos){
+					if(data){
+						mui.toast(data)
+					}
+					if(infos){
+						console.log(infos)
+						plus.storage.setItem("token", infos)
+						// 登录成功后对页面跳转的处理
+					}
+				})
+			})
+			
+			// 登录信息验证
+			function login(valobj, callback){
+				// 发送ajax到后台，判断用户登录是否成功
+				Ajax({
+					url : "/members/logins",
+					data : valobj
+				}, function(data){
+					console.log(JSON.stringify(data))
+					var logupInfo = JSON.stringify(valobj);
+					callback(null, logupInfo);
+				}, function(data){
+					console.log(JSON.stringify(data))
+				})
+				
+			}
+			function formateval(str){
+      			return $.trim(str);
+      		}
+      	})
     </script>
 </body>
 </html>
