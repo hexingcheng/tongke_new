@@ -12,14 +12,15 @@
     	.head-img-box {border-radius: 50%;overflow: hidden;}
     	.porel {position: relative;width: 80px;height: 80px;margin: 20px auto;}
     	#add-headimg {position: absolute;right: 0px;bottom: 0px;font-size: 18px;font-weight: bold;color: burlywood;}
-    	#show-pwd-one,
-    	#show-pwd-two {width: 40px;height: 40px;}
+    	.show-pwd {width: 40px;height: 40px;}
     	.divide-top {margin-top: 10px;}
     	.button-group {margin-top: 20px;}
     	.code-wrap {width: 100px;height: 40px;box-sizing: border-box;padding: 7px 10px 7px 0;}
     	#get-code {width: 90px;padding: 0;height: 26px;font-size: 13px;}
     	#type {margin-bottom: 0;padding: 0 15px;width: 100%;color: #aaa;border-radius: 0;}
     	.code-box {margin-right: 100px;}
+    	.eye-one {display: block;}
+    	.eye-two {display: none;}
     </style>
 </head>
 <body>
@@ -42,7 +43,7 @@
 				</div>
 				<div class="mui-input-group">
 					<div class="mui-input-row">
-						<input type="text" id="nickname" placeholder="用户名" maxlength="">
+						<input type="text" id="nickname" placeholder="用户名" maxlength="10">
 					</div>
 					<div class="mui-input-row">
 						<select id="type" class="type-select mui-text-left">
@@ -66,17 +67,19 @@
 					</div>
 				</div>
 				<div class="mui-input-group divide-top">
-					<div class="mui-input-row">
-						<span id="show-pwd-one" class="mui-pull-right">
-							<img src="../../img/log/eye.png" width="100%"/>
+					<div class="mui-input-row pwd-input">
+						<span class="mui-pull-right show-pwd">
+							<img src="../../img/log/eye.png" class="eye-one" width="100%"/>
+							<img src="../../img/log/1182351.png" class="eye-two" width="100%"/>
 						</span>
 						<div class="input-box">
 							<input type="password" id="pwd" placeholder="密码">
 						</div>
 					</div>
-					<div class="mui-input-row">
-						<span id="show-pwd-two" class="mui-pull-right">
-							<img src="../../img/log/eye.png" width="100%"/>
+					<div class="mui-input-row pwd-input">
+						<span class="mui-pull-right show-pwd">
+							<img src="../../img/log/eye.png" class="eye-one" width="100%"/>
+							<img src="../../img/log/1182351.png" class="eye-two" width="100%"/>
 						</span>
 						<div class="input-box">
 							<input type="password" id="conform-pwd" placeholder="确认密码">
@@ -93,12 +96,102 @@
 	<script src="../../js/libs/jquery.min.js"></script>
 	<script>
       	mui.init();
-      	mui.plusReady(function(){
+      	mui.ready(function(){
       		mui(".mui-scroll-wrapper").scroll();
+      		// 控制密码显示与隐藏
+			$('.show-pwd').on('tap',function(){
+				var $this = $(this);
+            	var one = $this.find(".eye-one");
+            	var two = $this.find(".eye-two");
+            	var $input = $this.parent(".pwd-input").find("input");
+            	if(one.css("display") == "block"){
+            		one.css("display", "none");
+            		two.css("display", "block");
+            		$input.attr("type","text");
+            	} else {
+            		one.css("display", "block");
+            		two.css("display", "none");
+            		$input.attr("type","password");
+            	}
+			})
       		
-      		// 
+      		// 获取验证码
+      		$("#get-code").on("tap", function(){
+      			var phone = formateval($("#phone").val());
+      			if(phone && phone.length != 11){
+      				mui.toast("请输入合法的手机号码")
+      			} else {
+      				Ajax({
+      					url : "/publics/smscodes",
+      					data : {
+      						mobile : phone
+      					}
+      				}, function(data){
+      					console.log(JSON.stringify(data))
+      				}, function(err){
+      					console.log(JSON.stringify(err))
+      				})
+      			}
+      		})
       		
+      		// 注册按钮操作
+      		$("#action-logup").on("tap", function(){
+      			var info = {
+      				username : formateval($("#nickname").val()),
+      				typesid : formateval($("#type").val()),
+      				mobile : formateval($("#phone").val()),
+      				checkcode : formateval($("#code").val()),
+      				password : formateval($("#pwd").val()),
+      				vpassword : formateval($("#conform-pwd").val())
+      			}
+      			logup(info, function(data, infos){
+      				if(data){
+      					mui.toast(data)
+      				}
+      				if(infos){
+      					alert(infos);
+      				}
+      			})
+      		})
       		
+      		// 注册函数
+      		function logup(valobj, callback){
+      			var reph = /^[0-9]{11}$/;
+				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
+				if(valobj.username.length < 2 && valobj.username.length > 10){
+					callback("注册用户名不规范");
+					return;
+				}
+				if(!valobj.typesid){
+					callback("请选择合法的工作类型");
+					return;
+				}
+				if(!reph.test(valobj.mobile)){
+					callback("只允许中国范围内的手机号码");
+					return;
+				}
+				if(valobj.password.length < 6){
+					callback("注册密码不能小于六位");
+					return;
+				} else if(!repw.test(valobj.password)){
+					callback("密码中包含非法字符");
+					return;
+				}
+				if(valobj.password != valobj.vpassword){
+					callback("请确认密码正确");
+					return;
+				}
+				if(!(valobj.username && valobj.typesid && valobj.mobile && valobj.checkcode && valobj.password && valobj.vpassword)){
+					callback("请完善注册内容");
+					return;
+				}
+				var logupInfo = JSON.stringify(valobj);
+				callback(null, logupInfo);
+      		}
+      		
+      		function formateval(str){
+      			return $.trim(str);
+      		}
       	})
     </script>
 </body>
