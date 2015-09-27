@@ -6,15 +6,38 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta />
 		<title></title>
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="css/public/public.css" />
+		<style>
+		.tit{
+			float: left;
+			min-width: 60px;
+			height: 44px;
+		}
+		.search{
+			overflow: hidden;
+		}
+		.search-input{
+			height: 30px;
+			margin: 7px 0;
+			border: 1px solid #fff; 
+			border-radius: 5px;
+			line-height: 30px;
+		} 
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav" id="header">
-			<h1 class="mui-title" id="title">同客</h1>
+			<h1 class="mui-title" id="title">
+				<div class="tit"><span class="addr">地区</span><span class="mui-icon mui-icon-arrowdown arrowdown mui-hidden"></span></div>
+				<div class="search">
+					<div class="search-input">
+						<div class="mui-icon mui-icon-search"></div>
+					</div>
+				</div>
+			</h1>
 			<a class="mui-icon mui-icon-compose mui-pull-right" id="rightbtn" data-forword = './pages/indexpage/newactivity.html'></a>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
@@ -48,13 +71,13 @@
 			var subpages = ['./pages/indexpage/active.html', './pages/friends/friendspage.html', './pages/messages/msgpage.html', './pages/find/findpage.html', './pages/myself/myselfpage.html'];
 			var subpage_style = {
 				top: '44px',
-				bottom: '50px'
+				bottom: '50px' 
 			};
 			var aniShow = {};
 			var first = null;
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				iflog();
+				
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 5; i++) {
 					var temp = {};
@@ -76,8 +99,16 @@
 				for(var i = 0;i<len;i++){
 					preloads.push(item[i].getAttribute('data-riconforword'))
 				}
+				plus.geolocation.getCurrentPosition(function(pos){
+					$('.addr').text(pos.address.city);
+					$('.arrowdown').removeClass('mui-hidden');
+				},function(){},{
+					provider:'baidu',
+					timeout:60000,
+					maximumAge:600000
+				})
 				preload(preloads);
-				
+//				iflog();
 			});
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");

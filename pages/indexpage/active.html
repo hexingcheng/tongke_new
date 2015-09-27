@@ -11,63 +11,237 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
+		<style>
+		html,body,.mui-content,.mui-scroll-wrapper,.mui-scroll{
+			width: 100%;
+		}
+			.sliderpic{
+				height: 200px;
+			}
+			.activity .active{
+				border-bottom:2px solid #fa7456;
+				color: #fa7456;
+			}
+			.tabitem{
+				float: left;
+				height: 40px;
+				line-height: 40px;
+				padding: 0 20px;
+				color: #a1a1a1;
+			}
+			.tabs{
+				height: 40px;
+				width: 222px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			.activity{
+				margin-top: -6px;
+
+			}
+			.activitytabs{
+				background-color: #FFFFFF;
+				margin-bottom: 10px;				
+			}
+			.a-list{
+				position: relative;
+				padding: 15px 15px 10px 15px;
+				background-color: #FFFFFF;
+				border-bottom: 1px solid #d7d7d7;
+			}
+			.l-title{
+				font-size: 16px;
+				color: #333333;
+			}
+			.l-charge{
+				color: #fa7456;
+				font-size: 12px;
+				vertical-align: middle;
+			}
+			.icon{
+				color: #4ec6f8;
+				width: 20px;
+				height: 25px;
+				text-align: left;
+				line-height: 25px;
+				float: left;
+			}
+			.icon span{
+				font-size: 14px;
+			}
+			.l-addr,.l-time{
+				overflow: hidden;
+			}
+			.rightover{
+				overflow: hidden;
+			}
+			.time-text,.addr-text{
+				height: 25px;
+				line-height: 25px;
+				font-size: 14px;
+				color: #666666;
+			}
+			.interets{
+				position: absolute;
+				right: 15px;
+				bottom: 5px;
+				font-size: 14px;
+				color: #666666;
+				vertical-align: top;
+			}
+			.peo-num{
+				color: #fa7456;
+				font-size: 20px;
+			}
+			.activity{
+				height: 100%;
+				width: 100%;
+				position: relative;
+				overflow: hidden;
+			}
+			.a-content{
+				position: absolute;
+				top: 50px;
+				left:0; 
+				width: 100%;
+				height: 100%;
+			}
+		</style>
 	</head>
 
 	<body>
-
 		<div class="mui-content">
 			<div class="mui-scroll-wrapper">
 				<div class="mui-scroll">
-					
+					<div class="slide">
+						<div class="mui-slider">
+							<div class="mui-slider-group">
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic1.jpg" class="sliderpic" data-detail='' />
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic2.jpg" class="sliderpic" data-detail='' />
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic3.jpg" class="sliderpic" data-detail='' />
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic4.jpg" class="sliderpic" data-detail='' />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="activity">
+						<div class="activitytabs">
+							<div class="tabs">
+								<div class="tabitem hot active">热门</div>
+								<div class="tabitem near">附近</div>
+								<div class="tabitem new">动态</div>
+							</div>
+						</div>
+						<div class="item a-content">
+
+						</div>
+						<div class="item mui-hidden">
+							附近
+						</div>
+						<div class="item mui-hidden">
+							动态
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/libs/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/libs/template.js"></script>
 	<script type="text/javascript" src="../../js/utils/tools.js"></script>
+	<script type="text/html" id="ac-list">
+		{{each list}}
+		<div class="a-list">
+			<div class="l-title">{{$value.title}}</div>
+			<div class="l-charge">￥<span class="money">{{$value.charge}}</span>起</div>
+			<div class="l-addr">
+				<div class="icon">
+					<span class="mui-icon mui-icon-location"></span>
+				</div>
+				<div class="rightover time-text">
+					{{$value.addr}}
+				</div>
+			</div>
+			<div class="l-time">
+				<div class="icon">
+					<span class="mui-icon mui-icon-navigate"></span>
+				</div>
+				<div class="rightover addr-text">
+					{{$value.time}}
+				</div>
+			</div>
+			<div class="interets">
+				<span class="peo-num">{{$value.num}}</span> 感兴趣
+			</div>
+		</div>
+		{{/each}}
+	</script>
 	<script>
-		$('.submit').on('tap', function() {
-			var phone = $('.phone').val();
-			mui.toast(phone);
-			//			Ajax({ 
-			//				url: '/publics/smscodes',
-			//				data: {
-			//					mobile: phone
-			//				}
-			//			}, function(data) {
-			//				alert(1)
-			//				console.log(data);
-			//				console.log(JSON.stringify(data));
-			//			}, function(data) {
-			//				console.log(data);
-			//			}) 
-			mui.ajax(BASEURL + '/members/get_members_infos', {
-				//				data:{
-				//					mobile: phone
-				//				},
-				dataType: 'json',
-				type: 'post',
-				success: function(data) {
-					console.log(JSON.stringify(data))
-				},
-				error: function(xhr, type) {
-					console.log(xhr.status + ':' + type);
-				}
-			})
+		mui('.tabs').on('tap','.tabitem',function(){
+			$('.tabitem').removeClass('active');
+			$(this).addClass('active');
 		})
 		 mui.plusReady(function() {
-			mui('.mui-scroll-wrapper').scroll()
+			mui('.mui-scroll-wrapper').scroll();
+			var data = {
+				list:[{
+					title:'2015中国重庆世界旅游资源博览会',
+					charge:'100',
+					addr:'上海滨江森林公园',
+					time:'10月17日 周六 上午 8:00',
+					num:'3193'
+				},{
+					title:'2015中国重庆世界旅游资源博览会',
+					charge:'100',
+					addr:'上海滨江森林公园',
+					time:'10月17日 周六 上午 8:00',
+					num:'3193'
+				},{
+					title:'2015中国重庆世界旅游资源博览会',
+					charge:'100',
+					addr:'上海滨江森林公园',
+					time:'10月17日 周六 上午 8:00',
+					num:'3193'
+				},{
+					title:'2015中国重庆世界旅游资源博览会',
+					charge:'100',
+					addr:'上海滨江森林公园',
+					time:'10月17日 周六 上午 8:00',
+					num:'3193'
+				},{
+					title:'2015中国重庆世界旅游资源博览会',
+					charge:'100',
+					addr:'上海滨江森林公园',
+					time:'10月17日 周六 上午 8:00',
+					num:'3193'
+				},{
+					title:'2015中国重庆世界旅游资源博览会',
+					charge:'100',
+					addr:'上海滨江森林公园',
+					time:'10月17日 周六 上午 8:00',
+					num:'3193'
+				}]
+			}
+			var html = template("ac-list", data);
+			$('.a-content').html(html)
 			plus.navigator.closeSplashscreen();
 			mui('body').on('scroll', '.mui-scroll', function(e) {
-				var scrollTop = $(this).position().top;
-				//				var slideHeigt = $().height();
-				var opener = plus.webview.getLaunchWebview();
-				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
-				if (scrollTop < 0 && Math.abs(scrollTop) > 100) {
-					mui.fire(opener, 'hideHead')
-				} else if (scrollTop > 0) {
-					mui.fire(opener, 'showHead')
-				}
+//				var scrollTop = $(this).position().top;
+//				//				var slideHeigt = $().height();
+//				var opener = plus.webview.getLaunchWebview();
+//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
+//				if (scrollTop < 0 && Math.abs(scrollTop) > 150) {
+//					mui.fire(opener, 'hideHead')
+//				} else if (scrollTop > 0) {
+//					mui.fire(opener, 'showHead')
+//				}
 			})
 		})
 	</script>
