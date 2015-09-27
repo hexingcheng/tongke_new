@@ -12,53 +12,57 @@
 			mui.init();
 		</script>
 		<style>
-		html,body,.mui-content,.mui-scroll-wrapper,.mui-scroll{
-			width: 100%;
-		}
-			.sliderpic{
+			html,
+			body,
+			.mui-content,
+			.mui-scroll-wrapper,
+			.mui-scroll {
+				width: 100%;
+			}
+			.sliderpic {
 				height: 200px;
 			}
-			.activity .active{
-				border-bottom:2px solid #fa7456;
+			.activity .active {
+				border-bottom: 2px solid #fa7456;
 				color: #fa7456;
 			}
-			.tabitem{
+			.tabitem {
 				float: left;
 				height: 40px;
 				line-height: 40px;
 				padding: 0 20px;
 				color: #a1a1a1;
 			}
-			.tabs{
+			.tabs {
 				height: 40px;
 				width: 222px;
 				margin: 0 auto;
 				overflow: hidden;
 			}
-			.activity{
+			.activity {
 				margin-top: -6px;
-
 			}
-			.activitytabs{
+			.activitytabs {
 				background-color: #FFFFFF;
-				margin-bottom: 10px;				
+				margin-bottom: 10px;
 			}
-			.a-list{
+			.a-list {
 				position: relative;
+				width: 100%;
 				padding: 15px 15px 10px 15px;
 				background-color: #FFFFFF;
 				border-bottom: 1px solid #d7d7d7;
 			}
-			.l-title{
+			.l-title {
 				font-size: 16px;
 				color: #333333;
 			}
-			.l-charge{
+			.l-charge {
 				color: #fa7456;
 				font-size: 12px;
 				vertical-align: middle;
 			}
-			.icon{
+			.icon {
 				color: #4ec6f8;
 				width: 20px;
 				height: 25px;
@@ -66,22 +70,24 @@
 				line-height: 25px;
 				float: left;
 			}
-			.icon span{
+			.icon span {
 				font-size: 14px;
 			}
-			.l-addr,.l-time{
+			.l-addr,
+			.l-time {
 				overflow: hidden;
 			}
-			.rightover{
+			.rightover {
 				overflow: hidden;
 			}
-			.time-text,.addr-text{
+			.time-text,
+			.addr-text {
 				height: 25px;
 				line-height: 25px;
 				font-size: 14px;
 				color: #666666;
 			}
-			.interets{
+			.interets {
 				position: absolute;
 				right: 15px;
 				bottom: 5px;
@@ -89,21 +95,28 @@
 				color: #666666;
 				vertical-align: top;
 			}
-			.peo-num{
+			.peo-num {
 				color: #fa7456;
 				font-size: 20px;
 			}
-			.activity{
+			.activity {
 				height: 100%;
 				width: 100%;
-				position: relative;
 				overflow: hidden;
 			}
-			.a-content{
+			.tabview {
 				position: absolute;
-				top: 50px;
-				left:0; 
-				width: 100%;
+				top: 0;
+				left: 0;
+				width: 300%;
+				z-index: 100;
+			}
+			.rla{
+				position: relative;
+			}
+			.item {
+				width: 33.3333%;
+				float: left;
 				height: 100%;
 			}
 		</style>
@@ -134,19 +147,23 @@
 					<div class="activity">
 						<div class="activitytabs">
 							<div class="tabs">
-								<div class="tabitem hot active">热门</div>
-								<div class="tabitem near">附近</div>
-								<div class="tabitem new">动态</div>
+								<div class="tabitem hot active" data-sort = '0'>热门</div>
+								<div class="tabitem near" data-sort = '1'>附近</div>
+								<div class="tabitem new" data-sort = '2'>动态</div>
 							</div>
 						</div>
-						<div class="item a-content">
-
-						</div>
-						<div class="item mui-hidden">
-							附近
-						</div>
-						<div class="item mui-hidden">
-							动态
+						<div class="rla">
+							<div class="tabview">
+								<div class="item a-content">
+									aa
+								</div>
+								<div class="item a-hot">
+									附近
+								</div>
+								<div class="item a-new">
+									动态
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -184,66 +201,106 @@
 		{{/each}}
 	</script>
 	<script>
-		mui('.tabs').on('tap','.tabitem',function(){
+		mui('.tabs').on('tap', '.tabitem', function() {
+			var sortstart = parseInt($('.tabitem').filter('.active').attr('data-sort'));
+			var sortend = parseInt($(this).attr('data-sort'));
+			var gaps = sortend-sortstart;
+			var aniparam = {};
+			if(gaps>0){
+				aniparam.left = '-='+gaps+'00%';
+			}else if(gaps<0){
+				aniparam.left = '+='+Math.abs(gaps)+'00%';
+			}else if(gaps==0){
+				return;
+			}
 			$('.tabitem').removeClass('active');
 			$(this).addClass('active');
+			$('.tabview').animate(aniparam,300)
+		})
+		mui('.rla').on('dragend','.tabview',function(e){
+			var sort = parseInt($('.tabitem').filter('.active').attr('data-sort'));
+			var param = {};
+			if(e.detail.direction=='left'){
+				param.left = "-=100%";
+				$('.tabitem').removeClass('active');
+				$('.tabitem').eq(--sort).addClass('active');
+			}else if(e.detail.direction=='right'){
+				param.left = "+=100%";
+				$('.tabitem').removeClass('active');
+				$('.tabitem').eq(++sort).addClass('active'); 
+			}else{
+				return;
+			}
+			$(this).animate(param,300);
 		})
 		 mui.plusReady(function() {
 			mui('.mui-scroll-wrapper').scroll();
 			var data = {
-				list:[{
-					title:'2015中国重庆世界旅游资源博览会',
-					charge:'100',
-					addr:'上海滨江森林公园',
-					time:'10月17日 周六 上午 8:00',
-					num:'3193'
-				},{
-					title:'2015中国重庆世界旅游资源博览会',
-					charge:'100',
-					addr:'上海滨江森林公园',
-					time:'10月17日 周六 上午 8:00',
-					num:'3193'
-				},{
-					title:'2015中国重庆世界旅游资源博览会',
-					charge:'100',
-					addr:'上海滨江森林公园',
-					time:'10月17日 周六 上午 8:00',
-					num:'3193'
-				},{
-					title:'2015中国重庆世界旅游资源博览会',
-					charge:'100',
-					addr:'上海滨江森林公园',
-					time:'10月17日 周六 上午 8:00',
-					num:'3193'
-				},{
-					title:'2015中国重庆世界旅游资源博览会',
-					charge:'100',
-					addr:'上海滨江森林公园',
-					time:'10月17日 周六 上午 8:00',
-					num:'3193'
-				},{
-					title:'2015中国重庆世界旅游资源博览会',
-					charge:'100',
-					addr:'上海滨江森林公园',
-					time:'10月17日 周六 上午 8:00',
-					num:'3193'
+				list: [{
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
 				}]
 			}
 			var html = template("ac-list", data);
-			$('.a-content').html(html)
+			$('.a-content').html(html);
+			var h1 = $('.a-hot').height();
+			var h2 = $('.a-content').height();
+			var h3 = $('.a-new').height();
+			var hs = [h1,h2,h3]
+			var h = max(hs)
+			$('.rla').height(h)
+			$('.tabview').height(h)
 			plus.navigator.closeSplashscreen();
 			mui('body').on('scroll', '.mui-scroll', function(e) {
-//				var scrollTop = $(this).position().top;
-//				//				var slideHeigt = $().height();
-//				var opener = plus.webview.getLaunchWebview();
-//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
-//				if (scrollTop < 0 && Math.abs(scrollTop) > 150) {
-//					mui.fire(opener, 'hideHead')
-//				} else if (scrollTop > 0) {
-//					mui.fire(opener, 'showHead')
-//				}
+				//				var scrollTop = $(this).position().top;
+				//				var slideHeigt = $().height();
+				//				var opener = plus.webview.getLaunchWebview();
+				//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
+				//				if (scrollTop < 0 && Math.abs(scrollTop) > 150) {
+				//					mui.fire(opener, 'hideHead')
+				//				} else if (scrollTop > 0) {
+				//					mui.fire(opener, 'showHead')
+				//				}
 			})
 		})
+		 function max(arr){
+		 	return arr.sort(function(a,b){
+		 		return b-a;
+		 	})[0];
+		 }
 	</script>
 
 </html>
