@@ -11,7 +11,7 @@
     	.head-img-wrap {}
     	.head-img-box {border-radius: 50%;overflow: hidden;}
     	.porel {position: relative;width: 80px;height: 80px;margin: 20px auto;}
-    	#add-headimg {position: absolute;right: 0px;bottom: 0px;font-size: 18px;font-weight: bold;color: burlywood;}
+    	#add-headimg {position: absolute;right: 0px;bottom: 0px;font-size: 18px;font-weight: bold;color: #fff;border-radius: 50%;overflow: hidden;background: #39bf9e;}
     	.show-pwd {width: 40px;height: 40px;}
     	.divide-top {margin-top: 10px;}
     	.button-group {margin-top: 20px;}
@@ -37,7 +37,7 @@
 					<div class="porel">
 						<div class="head-img-box">
 							<img src="../../img/log/user-photo.png" width="100%"/>
-							<span id="add-headimg" class="mui-icon mui-icon-plus"></span>
+							<span id="add-headimg" class="mui-icon mui-icon-plusempty"></span>
 						</div>
 					</div>
 				</div>
@@ -47,9 +47,7 @@
 					</div>
 					<div class="mui-input-row">
 						<select id="type" class="type-select mui-text-left">
-							<option value="">工作类型</option>
-							<option value="在校学生">在校学生</option>
-							<option value="公司职员">公司职员</option>
+							<option value="">学生</option>
 						</select>
 					</div>
 				</div>
@@ -62,7 +60,7 @@
 							<button id="get-code" class="mui-btn btn-color mui-btn-outlined">获取验证码</button>
 						</span>
 						<div class="code-box">
-							<input type="text" id="code" placeholder="验证码">
+							<input type="text" id="code" maxlength="6" placeholder="验证码">
 						</div>
 					</div>
 				</div>
@@ -96,7 +94,7 @@
 	<script src="../../js/libs/jquery.min.js"></script>
 	<script>
       	mui.init();
-      	mui.ready(function(){
+      	mui.plusReady(function(){
       		mui(".mui-scroll-wrapper").scroll();
       		// 控制密码显示与隐藏
 			$('.show-pwd').on('tap',function(){
@@ -115,27 +113,78 @@
             	}
 			})
       		
+      		// 获取用户类型
+      		getType(function(data){
+      			var html = "";
+      			var tinfo = data.datas;
+      			for(var i = 0; i < tinfo.length; i++){
+	      			html += '<option value="'+ tinfo[i].id +'">'+ tinfo[i].name +'</option>';
+      			}
+      			$("#type").html(html);
+      		})
+      		function getType(callback){
+      			Ajax({
+      				url : "/members/get_members_types"
+      			}, function(data){
+      				callback(data);
+      			}, function(err){
+      				console.log(err);
+      			})
+      		}
+      		$("#type").on("focus", function(){
+      			$(this).css("color", "#666")
+      		})
+      		
+      		// 手机号码，验证码修正
+      		fixedNum("#code");
+      		fixedNum("#phone");
+      		
+      		// 解决部分手机number类型的时候不出现placeholder属性值
+      		function fixedNum(selector){
+      			$(selector).on("focus", function(){
+	      			$(this).attr("type", "number");
+	      		})
+	      		$(selector).on("blur", function(){
+	      			$(this).attr("type", "text");
+	      		})
+      		}
+      		
       		// 获取验证码
+      		var time = 60;
+      		var timer = null;
       		$("#get-code").on("tap", function(){
+      			var $this = $(this);
       			var phone = formateval($("#phone").val());
       			if(phone && phone.length != 11){
       				mui.toast("请输入合法的手机号码")
       			} else {
+      				timer = setInterval(function(){
+      					if(time != 0){
+	  						$this.html((time--) + "s");
+      					} else {
+      						$this.attr("disabled", false);
+      						$this.html("重新发送");
+      					}
+  					},1000)
+      				$this.attr("disabled", true);
       				Ajax({
       					url : "/publics/smscodes",
       					data : {
       						mobile : phone
       					}
       				}, function(data){
-      					console.log(JSON.stringify(data))
+      					mui.toast("请求发送成功");
       				}, function(err){
-      					console.log(JSON.stringify(err))
+      					$this.attr("disabled", false);
+      					clearInterval(timer);
+      					$this.html("重新发送");
       				})
       			}
       		})
       		
       		// 注册按钮操作
       		$("#action-logup").on("tap", function(){
+      			var $this = $(this);
       			var info = {
       				username : formateval($("#nickname").val()),
       				typesid : formateval($("#type").val()),
@@ -149,7 +198,23 @@
       					mui.toast(data)
       				}
       				if(infos){
-      					alert(infos);
+      					$this.attr("disabled", true);
+      					$this.html("注册中...")
+      					console.log(typeof infos+"  "+JSON.stringify(infos))
+      					Ajax({
+      						url : "/members/registers",
+      						data : infos
+      					}, function(data){
+      						console.log(JSON.stringify(data))
+      						plus.storage.setItem("userinfo", JSON.stringify(infos));
+      						openWindow("../../index.html");
+      					}, function(err){
+      						console.log(JSON.stringify(err))
+      						$this.attr("disabled", false);
+      						$this.html("注册")
+      						$("#code").html("重新发送");
+      						$("#code").attr("disabled", false);
+      					})
       				}
       			})
       		})
@@ -158,7 +223,8 @@
       		function logup(valobj, callback){
       			var reph = /^[0-9]{11}$/;
 				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
-				if(valobj.username.length < 2 && valobj.username.length > 10){
+				console.log(valobj.username)
+				if(!valobj.username && (valobj.username.length < 2 || valobj.username.length > 10)){
 					callback("注册用户名不规范");
 					return;
 				}
@@ -185,8 +251,7 @@
 					callback("请完善注册内容");
 					return;
 				}
-				var logupInfo = JSON.stringify(valobj);
-				callback(null, logupInfo);
+				callback(null, valobj);
       		}
       		
       		function formateval(str){

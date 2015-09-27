@@ -23,7 +23,7 @@
 	<div class="mui-content">
 		<form class="mui-input-group">
 			<div class="mui-input-row">
-				<input type="text" id="log-name" placeholder="手机号/用户名">
+				<input type="text" id="log-name" placeholder="手机号/用户名/邮箱">
 			</div>
 			<div class="mui-input-row pwd-input">
 				<span class="mui-pull-right show-pwd">
@@ -66,12 +66,13 @@
 			$("#action-login").on("click",function(){
 				var nickname = formateval($("#log-name").val());
 				var pwd = formateval($("#log-pwd").val());
-				if(!nickname || nickname.length < 2 || nickname.length > 11){
-					mui.toast("请输入合法的用户名")
+				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
+				var remail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+				if(!nickname || nickname.length < 2 || nickname.length > 11 || remail.test(nickname)){
+					mui.toast("用户名输入错误")
 					$("#log-name").val("");
 					return;
 				}
-				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
 				if(pwd.length < 6 || !repw.test(pwd)){
 					mui.toast("请确定密码输入合法");
 					$("#log-pwd").val("");
@@ -87,8 +88,9 @@
 					}
 					if(infos){
 						console.log(infos)
-						plus.storage.setItem("token", infos)
+						plus.storage.setItem("userinfo", infos)
 						// 登录成功后对页面跳转的处理
+						openWindow("../../index.html");
 					}
 				})
 			})
@@ -100,7 +102,6 @@
 					url : "/members/logins",
 					data : valobj
 				}, function(data){
-					console.log(JSON.stringify(data))
 					var logupInfo = JSON.stringify(valobj);
 					callback(null, logupInfo);
 				}, function(data){
