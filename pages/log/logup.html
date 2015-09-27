@@ -34,10 +34,10 @@
 		<div class="mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<div class="head-img-wrap">
-					<div class="porel">
+					<div class="porel" id="choose">
 						<div class="head-img-box">
-							<img src="../../img/log/user-photo.png" width="100%"/>
-							<span id="add-headimg" class="mui-icon mui-icon-plusempty"></span>
+							<img src="../../img/log/user-photo.png" width="100%" class="choose-headimg"/>
+							<span id="add-headimg" class="mui-icon mui-icon-plusempty choose-headimg"></span>
 						</div>
 					</div>
 				</div>
@@ -89,6 +89,21 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<span id="take-photo">拍照</span>
+			</li>
+			<li class="mui-table-view-cell">
+				<span id="choose-pic">从相册中选取</span>
+			</li>
+		</ul>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<a href="#picture"><b>取消</b></a>
+			</li>
+		</ul>
 	</div>
 	<script src="../../js/utils/tools.js"></script>
 	<script src="../../js/libs/jquery.min.js"></script>
@@ -254,9 +269,28 @@
 				callback(null, valobj);
       		}
       		
+      		// 字符串处理
       		function formateval(str){
       			return $.trim(str);
       		}
+      		$(".choose-headimg").on("tap", function(){
+      			mui("#picture").popover("toggle");
+      		})
+      		
+      		// 照相获取图片
+      		$("#take-photo").on("tap", function(){
+      			
+      		})
+      		
+      		// 从相册中获取图片
+      		$("#choose-pic").on("tap", function(){
+      			
+      		})
+      		
+      		// 自定义事件触发添加图像图片
+      		window.addEventListener("refersh:heaimg", function(eve){
+      			
+      		})
       	})
     </script>
 </body>
