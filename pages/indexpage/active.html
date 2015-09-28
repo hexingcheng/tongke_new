@@ -11,65 +11,312 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
+		<style>
+			html,
+			body,
+			.mui-content,
+			.mui-scroll-wrapper,
+			.mui-scroll {
+				width: 100%;
+			}
+			.sliderpic {
+				height: 200px;
+			}
+			.activity .active {
+				border-bottom: 2px solid #fa7456;
+				color: #fa7456;
+			}
+			.tabitem {
+				float: left;
+				height: 40px;
+				line-height: 40px;
+				padding: 0 20px;
+				color: #a1a1a1;
+			}
+			.tabs {
+				height: 40px;
+				width: 222px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			.activity {
+				margin-top: -6px;
+			}
+			.activitytabs {
+				background-color: #FFFFFF;
+				margin-bottom: 10px;
+			}
+			.a-list {
+				position: relative;
+				width: 100%;
+				padding: 15px 15px 10px 15px;
+				background-color: #FFFFFF;
+				border-bottom: 1px solid #d7d7d7;
+			}
+			.l-title {
+				font-size: 16px;
+				color: #333333;
+			}
+			.l-charge {
+				color: #fa7456;
+				font-size: 12px;
+				vertical-align: middle;
+			}
+			.icon {
+				color: #4ec6f8;
+				width: 20px;
+				height: 25px;
+				text-align: left;
+				line-height: 25px;
+				float: left;
+			}
+			.icon span {
+				font-size: 14px;
+			}
+			.l-addr,
+			.l-time {
+				overflow: hidden;
+			}
+			.rightover {
+				overflow: hidden;
+			}
+			.time-text,
+			.addr-text {
+				height: 25px;
+				line-height: 25px;
+				font-size: 14px;
+				color: #666666;
+			}
+			.interets {
+				position: absolute;
+				right: 15px;
+				bottom: 5px;
+				font-size: 14px;
+				color: #666666;
+				vertical-align: top;
+			}
+			.peo-num {
+				color: #fa7456;
+				font-size: 20px;
+			}
+			.activity {
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+			.tabview {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 300%;
+				z-index: 100;
+			}
+			.rla{
+				position: relative;
+			}
+			.item {
+				width: 33.3333%;
+				float: left;
+				height: 100%;
+			}
+			
+			
+			/*test*/
+			.test{
+				margin-top: 30px;
+				text-align: center;
+				color: #000000;
+			}
+		</style>
 	</head>
 
 	<body>
-
 		<div class="mui-content">
 			<div class="mui-scroll-wrapper">
 				<div class="mui-scroll">
-					
+					<div class="slide">
+						<div class="mui-slider">
+							<div class="mui-slider-group">
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic1.jpg" class="sliderpic" data-detail='' />
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic2.jpg" class="sliderpic" data-detail='' />
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic3.jpg" class="sliderpic" data-detail='' />
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/slider/pic4.jpg" class="sliderpic" data-detail='' />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="activity">
+						<div class="activitytabs">
+							<div class="tabs">
+								<div class="tabitem hot active" data-sort = '0'>热门</div>
+								<div class="tabitem near" data-sort = '1'>附近</div>
+								<div class="tabitem new" data-sort = '2'>动态</div>
+							</div>
+						</div>
+						<div class="rla">
+							<div class="tabview">
+								<div class="item a-content">
+									aa
+								</div>
+								<div class="item a-hot">
+									<div class="test">附近无最新动态</div> 
+								</div>
+								<div class="item a-new">
+									<div class="test">你的好友没有新动态</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/libs/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/libs/template.js"></script>
 	<script type="text/javascript" src="../../js/utils/tools.js"></script>
+	<script type="text/html" id="ac-list">
+		{{each list}}
+		<div class="a-list">
+			<div class="l-title">{{$value.title}}</div>
+			<div class="l-charge">￥<span class="money">{{$value.charge}}</span>起</div>
+			<div class="l-addr">
+				<div class="icon">
+					<span class="mui-icon mui-icon-location"></span>
+				</div>
+				<div class="rightover time-text">
+					{{$value.addr}}
+				</div>
+			</div>
+			<div class="l-time">
+				<div class="icon">
+					<span class="mui-icon mui-icon-navigate"></span>
+				</div>
+				<div class="rightover addr-text">
+					{{$value.time}}
+				</div>
+			</div>
+			<div class="interets">
+				<span class="peo-num">{{$value.num}}</span> 感兴趣
+			</div>
+		</div>
+		{{/each}}
+	</script>
 	<script>
-		$('.submit').on('tap', function() {
-			var phone = $('.phone').val();
-			mui.toast(phone);
-			//			Ajax({ 
-			//				url: '/publics/smscodes',
-			//				data: {
-			//					mobile: phone
-			//				}
-			//			}, function(data) {
-			//				alert(1)
-			//				console.log(data);
-			//				console.log(JSON.stringify(data));
-			//			}, function(data) {
-			//				console.log(data);
-			//			}) 
-			mui.ajax(BASEURL + '/members/get_members_infos', {
-				//				data:{
-				//					mobile: phone
-				//				},
-				dataType: 'json',
-				type: 'post',
-				success: function(data) {
-					console.log(JSON.stringify(data))
-				},
-				error: function(xhr, type) {
-					console.log(xhr.status + ':' + type);
+		mui('.tabs').on('tap', '.tabitem', function() {
+			var sortstart = parseInt($('.tabitem').filter('.active').attr('data-sort'));
+			var sortend = parseInt($(this).attr('data-sort'));
+			var gaps = sortend-sortstart;
+			var aniparam = {};
+			if(gaps>0){
+				aniparam.left = '-='+gaps+'00%';
+			}else if(gaps<0){
+				aniparam.left = '+='+Math.abs(gaps)+'00%';
+			}else if(gaps==0){
+				return;
+			}
+			$('.tabitem').removeClass('active');
+			$(this).addClass('active');
+			$('.tabview').animate(aniparam,300)
+		})
+		mui('.rla').on('dragend','.tabview',function(e){
+			var sort = parseInt($('.tabitem').filter('.active').attr('data-sort'));
+			var param = {};
+			
+			if(e.detail.direction=='left'){
+				sort+=1;
+				if(sort==3){
+					sort=2;
+					return;
 				}
-			})
+				param.left = "-=100%";
+			}else if(e.detail.direction=='right'){ 
+				sort-=1;
+				if(sort==-1){
+					sort==0
+					return;
+				}
+				param.left = "+=100%";
+			}else{
+				return;
+			}
+			$('.tabitem').removeClass('active').eq(sort).addClass('active'); 
+			$(this).animate(param,300);
 		})
 		 mui.plusReady(function() {
-			mui('.mui-scroll-wrapper').scroll()
+			mui('.mui-scroll-wrapper').scroll();
+			var data = {
+				list: [{
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}, {
+					title: '2015中国重庆世界旅游资源博览会',
+					charge: '100',
+					addr: '上海滨江森林公园',
+					time: '10月17日 周六 上午 8:00',
+					num: '3193'
+				}]
+			}
+			var html = template("ac-list", data);
+			$('.a-content').html(html);
+			var h1 = $('.a-hot').height();
+			var h2 = $('.a-content').height();
+			var h3 = $('.a-new').height();
+			var hs = [h1,h2,h3]
+			var h = max(hs)
+			$('.rla').height(h)
+			$('.tabview').height(h)
 			plus.navigator.closeSplashscreen();
 			mui('body').on('scroll', '.mui-scroll', function(e) {
-				var scrollTop = $(this).position().top;
+				//				var scrollTop = $(this).position().top;
 				//				var slideHeigt = $().height();
-				var opener = plus.webview.getLaunchWebview();
-				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
-				if (scrollTop < 0 && Math.abs(scrollTop) > 100) {
-					mui.fire(opener, 'hideHead')
-				} else if (scrollTop > 0) {
-					mui.fire(opener, 'showHead')
-				}
+				//				var opener = plus.webview.getLaunchWebview();
+				//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
+				//				if (scrollTop < 0 && Math.abs(scrollTop) > 150) {
+				//					mui.fire(opener, 'hideHead')
+				//				} else if (scrollTop > 0) {
+				//					mui.fire(opener, 'showHead')
+				//				}
 			})
 		})
+		 function max(arr){
+		 	return arr.sort(function(a,b){
+		 		return b-a;
+		 	})[0];
+		 }
 	</script>
 
 </html>
