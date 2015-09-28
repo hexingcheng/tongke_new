@@ -119,6 +119,14 @@
 				float: left;
 				height: 100%;
 			}
+			
+			
+			/*test*/
+			.test{
+				margin-top: 30px;
+				text-align: center;
+				color: #000000;
+			}
 		</style>
 	</head>
 
@@ -158,10 +166,10 @@
 									aa
 								</div>
 								<div class="item a-hot">
-									附近
+									<div class="test">附近无最新动态</div> 
 								</div>
 								<div class="item a-new">
-									动态
+									<div class="test">你的好友没有新动态</div>
 								</div>
 							</div>
 						</div>
@@ -220,17 +228,25 @@
 		mui('.rla').on('dragend','.tabview',function(e){
 			var sort = parseInt($('.tabitem').filter('.active').attr('data-sort'));
 			var param = {};
+			
 			if(e.detail.direction=='left'){
+				sort+=1;
+				if(sort==3){
+					sort=2;
+					return;
+				}
 				param.left = "-=100%";
-				$('.tabitem').removeClass('active');
-				$('.tabitem').eq(--sort).addClass('active');
-			}else if(e.detail.direction=='right'){
+			}else if(e.detail.direction=='right'){ 
+				sort-=1;
+				if(sort==-1){
+					sort==0
+					return;
+				}
 				param.left = "+=100%";
-				$('.tabitem').removeClass('active');
-				$('.tabitem').eq(++sort).addClass('active'); 
 			}else{
 				return;
 			}
+			$('.tabitem').removeClass('active').eq(sort).addClass('active'); 
 			$(this).animate(param,300);
 		})
 		 mui.plusReady(function() {
