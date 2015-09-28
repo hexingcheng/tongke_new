@@ -4,17 +4,168 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title data-right-icon = ''>我</title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
+    <link rel="stylesheet" href="../../fonts/iconfont.css"/>
+    <script src="../../js/mui.min.js"></script>
+    <style type="text/css">
+    	.mui-table-view-cell:after {left: 0;}
+    	.mui-table-view-cell {padding: 8px 15px;}
+    	.head-info-wrap {background: url(../../img/tiegui.jpg) no-repeat center center;color: #fff;height: 180px;position: relative;}
+    	.head-info {position: absolute;bottom: 20px;width: 100%;}
+    	.head-img-box {width: 65px;height: 65px;background: #ccc;border-radius: 50%;border: 1px solid #fff;margin: 10px;}
+    	.right-info {overflow: hidden;margin-left: 90px;height: 85px;margin-right: 75px;}
+    	.self-info-box {width: 70%;}
+    	.self-info-box .nickname {padding: 5px 0;}
+    	.self-info-box .properties {padding: 0 0 3px 0;}
+    	#worktype {}
+    	.divide-line {width: 2px;height: 14px;display: inline-block;background: #fff;}
+    	#company {}
+    	.self-info-box .tongke-box {}
+    	#set-tongke-id {padding: 0;color: red;}
+    	.edit-box {text-align: center;height: 85px;line-height: 85px;width: 75px;}
+    	.edit-box > span:nth-child(1),
+    	.edit-box > span:nth-child(2) {padding: 0 2px;}
+    	
+    	.icon {display: block;width: 20px;text-align: center;height: 20px;line-height: 20px;}
+    	.icon-one{color: #7F36BF;}
+    	.icon-two{color: #A8B3B5;}
+    	.icon-three {color: #E69A24;font-size: 20px;}
+    	.icon-four {color: #865181;font-size: 18px;}
+    	.icon-five {color: #B95A34;font-size: 19px;}
+    	.icon-six {color: #999C03;}
+    	.icon-seven {color: #444F79;}
+    	.item-bar {margin: 0 60px 0 30px;color: #736E77;}
+    	.badge {display: inline-block;height: 20px;line-height: 23px;margin-right: 20px;}
+    	.divide-bar {width: 100%;height: 15px;background: #efeff4;}
+    </style>
 </head>
 <body>
-<div class="mui-content">
-	<h1>个人模块首页面</h1>
-</div>
-<script>
-</script>
+	<div class="mui-content">
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!-- 头部信息显示部分 -->
+				<div class="head-info-wrap">
+					<div class="head-info">
+						<div class="head-img-box mui-pull-left">
+							<img src="../../img/log/user-photo.png" width="100%"/>
+						</div>
+						<div class="edit-box mui-pull-right">
+							<span class="iconfont icon-iconfontbianji"></span>
+							<span class="iconfont icon-iconfonterweima"></span>
+							<span class="iconfont icon-iconfontyou"></span>
+						</div>
+						<div class="right-info">
+							<div class="self-info-box mui-pull-left">
+								<div class="nickname mui-ellipsis">leexinqee</div>
+								<div class="properties mui-ellipsis">
+									<span id="worktype">前端开发</span>
+									<span class="divide-line"></span>
+									<span id="company">阿里</span>
+								</div>
+								<div class="tongke-box">
+									同客号:
+									<span id="tongke-id">
+										<button class="mui-btn mui-btn-link" data-href="./setting-tongkeid.html" id="set-tongke-id">未设置</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- body内容 -->
+				<div class="body-container">
+					<ul class="mui-table-view">
+						<div class="divide-bar"></div>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-ff-user mui-pull-left icon icon-one"></span>
+						    	<span class="mui-badge mui-badge-inverted mui-pull-right badge">1</span>
+						      	<div class="item-bar">
+							      	<span>我的好友</span>
+						      	</div>
+						    </div>
+						</li>
+						
+						<div class="divide-bar"></div>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-icon49 mui-pull-left icon icon-two"></span>
+						      	<div class="item-bar">
+							      	<span>参加的活动</span>
+						      	</div>
+						    </div>
+						</li>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-xiaoxi1 mui-pull-left icon icon-three"></span>
+						      	<div class="item-bar">
+							      	<span>发布的活动</span>
+						      	</div>
+						    </div>
+						</li>
+						
+						<div class="divide-bar"></div>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-hpdpiao mui-pull-left icon icon-four"></span>
+						      	<div class="item-bar">
+							      	<span>门票</span>
+						      	</div>
+						    </div>
+						</li>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-iconfontshoucang mui-pull-left icon icon-five"></span>
+						      	<div class="item-bar">
+							      	<span>收藏</span>
+						      	</div>
+						    </div>
+						</li>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-news mui-pull-left icon icon-six"></span>
+						      	<div class="item-bar">
+							      	<span>订阅</span>
+						      	</div>
+						    </div>
+						</li>
+						
+						<div class="divide-bar"></div>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+						    	<span class="iconfont icon-iconfontshezhi mui-pull-left icon icon-seven"></span>
+						      	<div class="item-bar">
+							      	<span>设置</span>
+						      	</div>
+						    </div>
+						</li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	<script src="../../js/libs/jquery.min.js"></script>
+	<script src="../../js/utils/tools.js"></script>
+	<script>
+		mui.init();
+		mui.plusReady(function(){
+			// 设置同客号
+			$("#tongke-id").on("tap", "#set-tongke-id", function(eve){
+				eve.preventBubble();
+				var href = $(this).attr("data-href");
+				openWindow(href)
+			})
+			
+			// 个人主页
+			$(".head-info").on("tap", function(){
+				var url = "./self-info.html";
+				openWindow(url);
+			})
+			
+		})
+	</script>
 </body>
 </html>

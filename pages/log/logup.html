@@ -92,11 +92,11 @@
 	</div>
 	<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
 		<ul class="mui-table-view">
-			<li class="mui-table-view-cell">
-				<span id="take-photo">拍照</span>
+			<li class="mui-table-view-cell" id="take-photo">
+				<span>拍照</span>
 			</li>
-			<li class="mui-table-view-cell">
-				<span id="choose-pic">从相册中选取</span>
+			<li class="mui-table-view-cell" id="choose-pic">
+				<span>从相册中选取</span>
 			</li>
 		</ul>
 		<ul class="mui-table-view">
@@ -279,7 +279,20 @@
       		
       		// 照相获取图片
       		$("#take-photo").on("tap", function(){
-      			
+      			var cmr = plus.camera.getCamera();
+				var res = cmr.supportedImageResolutions[0];
+				var fmt = cmr.supportedImageFormats[0];
+				cmr.captureImage(function( path ){
+					plus.io.resolveLocalFileSystemURL(path, function(entry) {
+						var local = entry.toLocalURL();
+						
+					});
+					mui("#picture").popover("toggle");
+				}, function( error ) {
+					console.log("Capture image failed: " + error.message );
+				}, {
+					resolution:res, format:fmt
+				});
       		})
       		
       		// 从相册中获取图片
