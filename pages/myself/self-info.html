@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css"/>
+    <script src="../../js/mui.min.js"></script>
+    <style type="text/css">
+    	.mui-scroll-wrapper {top: 44px;}
+    	.share-to {display: inline-block;width: 44px;height: 44px;
+    	text-align: center;line-height: 44px;}
+    	.head-info-wrap {background: url(../../img/tiegui.jpg) no-repeat center center;
+    	height: 300px;color: #fff;text-align: center;}
+    	.head-info {}
+    	.head-img-row {height: 65px;width: 100%;}
+    	.head-img-box {width: 65px; height: 65px;border-radius: 50%;
+    	overflow: hidden;background: #39BF9E;border: 1px solid #fff;margin: 0 auto;}
+    	
+    </style>
+</head>
+<body>
+	
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<a class="iconfont icon-daochueps mui-pull-right share-to"></a>
+		<h1 class="mui-title">个人主页</h1>
+	</header>
+	
+	<div class="mui-content">
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				
+				<div class="head-info-wrap">
+					<div class="head-info">
+						<div class="head-img-row">
+							<div class="head-img-box">
+								<img src="../../img/log/user-photo.png" width="100%"/>
+							</div>
+						</div>
+						<div class="nickname-row">
+							<span id="nickname">leexinqee</span>
+						</div>
+						<div class="worktype-row">
+							<div class="properties mui-ellipsis">
+								<span id="worktype">前端开发</span>
+								<span class="divide-line"></span>
+								<span id="company">阿里</span>
+							</div>
+						</div>
+						<div class="other-row">
+							<div class="mui-pull-left erweima">
+								<span class="iconfont icon-iconfonterweima"></span>二维码
+							</div>
+							<div class="mui-pull-left wexin">
+								<span class="mui-icon mui-icon-chatbubble"></span>二维码
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	
+    <script>
+      	mui.init();
+    </script>
+</body>
+</html>
