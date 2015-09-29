@@ -153,6 +153,7 @@
 		mui.init();
 		mui.plusReady(function(){
 			// 设置同客号
+			mui('.mui-scroll-wrapper').scroll()
 			$("#tongke-id").on("tap", "#set-tongke-id", function(eve){
 				eve.preventBubble();
 				var href = $(this).attr("data-href");

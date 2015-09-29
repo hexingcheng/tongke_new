@@ -9,10 +9,193 @@
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
+    <style>
+    	html,body{
+    		background-color: #f9f9fa;
+    	}
+    	.h50{
+    		height: 50px;
+    	}
+    	.h80{
+    		height: 80px;
+    	}
+    	.addbbor{
+    		border-bottom: 1px solid #d6d6d6;
+    	}
+    	.addtbor{
+    		border-top: 1px solid #d6d6d6;
+    	}
+    	.pullleft{
+    		float: left;
+    	}
+    	.clearfix{
+    		overflow: hidden;
+    	}
+    	.searchs{
+    		margin: 10px 0;
+    	}
+    	.w50{
+    		width: 50px;
+    	}
+    	.w60{
+    		width: 60px;
+    	}
+    	.center{
+    		line-height: 50px;
+    		text-align: center;
+    	}
+    	.textcenter{
+    		text-align: center;
+    	}
+    	.sear-ipt{
+    		height: 30px !important;
+    		margin: 10px 0;
+    		width: 100%;
+    		padding-left: 10px;
+    		border: 0;
+    		color: #898989;
+    	}
+    	input[type=text]{
+    		border: 0;
+    		margin: 10px 0;
+    		height: 30px;
+    		padding: 0;
+    		font-size: 14px;
+    	}
+    	.colorf{
+    		background-color: #FFFFFF;
+    	}
+    	.circle{
+    		width: 40px;
+    		height: 40px;
+    		margin: 20px 10px;
+    		border-radius: 50%;
+    		color: #FFFFFF;
+    		line-height: 40px;
+    		text-align: center;
+    	}
+    	.color1{
+    		background-color: #fa7456;
+    	}
+    	.color2{
+    		background-color: #7ace78;
+    	}
+    	.color3{
+    		background-color: #ff933b;
+    	}
+    	.color4{
+    		background-color: #ffd200;
+    	}
+    	.color5{
+    		background-color: #47aae9;
+    	}
+    	.enter,.nearby,.newfriend,.addfriend,.share{
+    		overflow: hidden;
+    		line-height: 80px;
+    		color: #333333;
+    	}
+    	.posrla{
+    		position: relative;
+    	}
+    	.entericon{
+    		color: #9b9b9b;
+    		position: absolute;
+			width: 50px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			top: 15px;
+			right: 0px;
+    	}
+    	.addmarbtm{
+    		margin-bottom: 20px;
+    	}
+    </style>
 </head>
 <body>
 <div class="mui-content">
-	<h1>发现模块首页面</h1>
+	<div class="mui-scroll-wrapper">
+		<div class="mui-scroll">
+			<div class="find-content">
+				<div class="searchs h50">
+					<div class="pullleft w60 textcenter colorf">
+						<span class="mui-icon mui-icon-search center"></span>
+					</div>
+					<div class="clearfix h50 colorf">
+						<input class="sear-ipt" type="text" placeholder="同客号/手机号"/>
+					</div>
+				</div>
+				<div class="enter h80 addbbor">
+					<div class="pullleft w60 textcenter colorf h80">
+						<div class="circle color1">
+							<span class="mui-icon mui-icon-location"></span>
+						</div>
+					</div>
+					<div class="clearfix h80 colorf posrla">
+						进现场
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+				<div class="nearby addbbor h80">
+					<div class="pullleft w60 textcenter colorf h80">
+						<div class="circle color2 ">
+							<span class="mui-icon mui-icon-personadd"></span>
+						</div>
+					</div>
+					<div class="clearfix h80 colorf posrla">
+						附近的人
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+				<div class="newfriend h80 addmarbtm addbbor">
+					<div class="pullleft w60 textcenter colorf h80">
+						<div class="circle color3">
+							<span class="mui-icon mui-icon-email"></span>
+						</div>
+					</div>
+					<div class="clearfix h80 colorf posrla">
+						推荐的人
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+				<div class="addfriend h80">
+					<div class="pullleft w60 textcenter colorf h80">
+						<div class="circle color4">
+							<span class="mui-icon mui-icon-paperplane"></span>
+						</div>
+					</div>
+					<div class="clearfix h80 colorf posrla">
+						当面加好友
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+				<div class="share h80 addtbor">
+					<div class="pullleft w60 textcenter colorf h80">
+						<div class="circle color5">
+							<span class="mui-icon mui-icon-paperclip"></span>
+						</div>
+					</div>
+					<div class="clearfix h80 colorf posrla">
+						扫一扫
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<script>
+	mui('.mui-scroll-wrapper').scroll()
+</script>
 </body>
 </html>
