@@ -151,15 +151,16 @@
 				}
 				console.log(JSON.stringify(info))
 				Ajax({
-					url : "/members/logins",
+					url : "/members/login_members",
 					data : info
 				}, function(data){
+					mui.toast('登陆成功')
 					console.log(JSON.stringify(data))
-					
 					var logupInfo = JSON.stringify(info);
-					plus.storage.setItem("userinfo", info)
+					plus.storage.setItem("userinfo", logupInfo);
 					// 登录成功后对页面跳转的处理
-					openWindow("../../index.html");
+//					openWindow("../../index.html");
+					plus.webview.getLaunchWebview().show('slide-in-left')
 				}, function(data){
 					console.log(JSON.stringify(data))
 					$this.html("登录");
@@ -197,7 +198,7 @@
       					$this.html("注册中...")
       					console.log(typeof infos+"  "+JSON.stringify(infos))
       					Ajax({
-      						url : "/members/registers",
+      						url : "/members/register_members",
       						data : infos
       					}, function(data){
       						console.log(JSON.stringify(data))

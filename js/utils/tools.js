@@ -22,12 +22,12 @@ function iflog(){
 			password:pwd
 		}
 		Ajax({
-			url:'/members/logins',
+			url:'/members/login_members',
 			data:data
 		},function(data){
-			alert('login success')
+			mui.toast('login success')
 		},function(){
-			alert('something error')
+			mui.toast('something error')
 		})
 	}else{
 		openWindow('./pages/log/login-up.html')
