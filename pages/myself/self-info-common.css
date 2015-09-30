@@ -1,0 +1,52 @@
+.mui-table-view-cell:after {left: 0;}
+.mui-scroll-wrapper {
+	top: 44px;
+}
+.share-to {
+	display: inline-block;
+	width: 44px;
+	height: 44px;
+	text-align: center;
+	line-height: 44px;
+}
+.head-info-wrap {
+	background: url(../../img/tiegui.jpg) no-repeat center center;
+	height: 220px;
+	color: #fff;
+	text-align: center;
+	position: relative;
+}
+.head-info {
+	position: absolute;
+	width: 100%;
+	bottom: 20px;
+}
+.head-img-row {
+	height: 65px;
+	width: 100%;
+	margin-bottom: 5px;
+}
+.head-img-box {
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	overflow: hidden;
+	background: #39BF9E;
+	border: 1px solid #fff;
+	margin: 0 auto;
+}
+.entry-info-wrap {
+	color: #666;
+}
+.label-tap {
+	background-color: #e13;
+	display: inline-block;
+	color: #fefefe;
+	font-size: 14px;
+	border-radius: 40px / 36px;
+	padding: 3px 5px 3px 15px;
+	margin: 5px 3px;
+}
+.mui-badge.mui-badge-inverted {
+	color: #fff;
+}

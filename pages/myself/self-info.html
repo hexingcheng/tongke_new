@@ -7,17 +7,10 @@
     <link href="../../css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/public/head-foot.css"/>
+    <link rel="stylesheet" type="text/css" href="self-info-common.css"/>
     <script src="../../js/mui.min.js"></script>
     <style type="text/css">
-    	.mui-scroll-wrapper {top: 44px;}
-    	.share-to {display: inline-block;width: 44px;height: 44px;
-    	text-align: center;line-height: 44px;}
-    	.head-info-wrap {background: url(../../img/tiegui.jpg) no-repeat center center;
-    	height: 220px;color: #fff;text-align: center;position: relative;}
-    	.head-info {position: absolute;width: 100%;bottom: 20px;}
-    	.head-img-row {height: 65px;width: 100%;margin-bottom: 5px;}
-    	.head-img-box {width: 65px; height: 65px;border-radius: 50%;
-    	overflow: hidden;background: #39BF9E;border: 1px solid #fff;margin: 0 auto;}
+    	
     	.divide-line {width: 2px;height: 14px;display: inline-block;background: #fff;}
     	.other-row {margin-top: 5px;}
     	.inline-box {overflow: hidden;width: 70%;margin: 0 auto;}
@@ -26,10 +19,10 @@
     	.erweima {width: 50%;border-right: 1px solid #fff;padding-right: 8px;}
     	.wexin {width: 50%;}
     	.text-info {height: 25px;display: inline-block;line-height: 25px;}
-    	#edit {border-color: #E69A24;color: #E69A24;}
+    	#edit {border-color: #39bf9e;color: #39bf9e;}
     	#edit span {padding-right: 5px;}
-    	.entry-info-wrap {color: #666;}
-    	.mui-table-view-cell:after {left: 0;}
+    	.title-info {width: 25%;}
+    	.info-box {width: 75%;}
     </style>
 </head>
 <body>
@@ -74,7 +67,7 @@
 									<span class="text-info">二维码</span>
 								</div>
 								<div class="mui-pull-left wexin">
-									<span class="mui-icon mui-icon-chatbubble icon-font"></span>
+									<span class="mui-icon mui-icon mui-icon-weixin icon-font"></span>
 									<span class="text-info">微信</span>
 								</div>
 							</div>
@@ -87,27 +80,37 @@
 					<ul class="mui-table-view">
 						<li class="mui-table-view-divider">联系方式</li>
 						<li class="mui-table-view-cell">
-							<span class="title-info">同客号:</span>
-							<span class="tongke-id-box">
+							<div class="title-info mui-pull-left">同客号:</div>
+							<div class="tongke-id-box info-box mui-pull-left">
 								<span id="tongke-id">未设置</span>
-							</span>
+							</div>
 						</li>
 						<li class="mui-table-view-cell">
-							<span class="title-info">手机:</span>
-							<span id="cell-phone">11223344556</span>
+							<div class="title-info mui-pull-left">手机:</div>
+							<div id="cell-phone" class="info-box mui-pull-left">11223344556</div>
 						</li>
 						<li class="mui-table-view-cell">
-							<span class="title-info">地区:</span>
-							<span id="cell-phone">未设置</span>
+							<div class="title-info mui-pull-left">地区:</div>
+							<div id="area" class="info-box mui-pull-left">未设置</div>
 						</li>
 						<li class="mui-table-view-cell">
-							<span class="title-info">邮箱:</span>
-							<span id="cell-phone">未设置</span>
+							<div class="title-info mui-pull-left">邮箱:</div>
+							<div id="email" class="info-box mui-pull-left">未设置</div>
 						</li>
 						<li class="mui-table-view-divider">标签</li>
 						<li class="mui-table-view-cell">
-							<span>创业</span>
-							<span>互联网</span>
+							<span class="label-tap">
+								<span class="label">创业</span>
+								<span class="mui-badge mui-badge-negative mui-badge-inverted">1</span>
+							</span>
+							<span class="label-tap">
+								<span class="label">互联网</span>
+								<span class="mui-badge mui-badge-negative mui-badge-inverted">1</span>
+							</span>
+							<span class="label-tap">
+								<span class="label">科技</span>
+								<span class="mui-badge mui-badge-negative mui-badge-inverted">1</span>
+							</span>
 						</li>
 						<li class="mui-table-view-divider">活动记录</li>
 						<li class="mui-table-view-cell">
@@ -127,8 +130,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
 	
     <script>
       	mui.init();
