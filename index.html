@@ -113,6 +113,11 @@
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
 			 //选项卡点击事件
+			var modulepages1 = [];
+			var modulepages2 = [];
+			var modulepages3 = [];
+			var modulepages4 = [];
+			var modulepages5 = [];
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var forword = this.getAttribute('data-riconforword');
 				var targetTab = this.getAttribute('href');
@@ -136,6 +141,7 @@
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
+				
 			});
 			window.addEventListener('hideHead',function(){
 				$('#header').css({
@@ -162,7 +168,6 @@
 					}
 				}
 			};
-			 //自定义事件，模拟点击“首页选项卡”
 		</script>
 	</body>
 

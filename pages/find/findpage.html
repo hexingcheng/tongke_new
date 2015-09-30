@@ -125,7 +125,7 @@
 						<input class="sear-ipt" type="text" placeholder="同客号/手机号"/>
 					</div>
 				</div>
-				<div class="enter h80 addbbor">
+				<div class="enter h80 addbbor list">
 					<div class="pullleft w60 textcenter colorf h80">
 						<div class="circle color1">
 							<span class="mui-icon mui-icon-location"></span>
@@ -138,7 +138,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="nearby addbbor h80">
+				<div class="nearby addbbor h80 list">
 					<div class="pullleft w60 textcenter colorf h80">
 						<div class="circle color2 ">
 							<span class="mui-icon mui-icon-personadd"></span>
@@ -151,7 +151,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="newfriend h80 addmarbtm addbbor">
+				<div class="newfriend h80 addmarbtm addbbor list">
 					<div class="pullleft w60 textcenter colorf h80">
 						<div class="circle color3">
 							<span class="mui-icon mui-icon-email"></span>
@@ -164,7 +164,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="addfriend h80">
+				<div class="addfriend h80 list">
 					<div class="pullleft w60 textcenter colorf h80">
 						<div class="circle color4">
 							<span class="mui-icon mui-icon-paperplane"></span>
@@ -177,7 +177,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="share h80 addtbor">
+				<div class="share h80 addtbor list">
 					<div class="pullleft w60 textcenter colorf h80">
 						<div class="circle color5">
 							<span class="mui-icon mui-icon-paperclip"></span>
@@ -195,7 +195,10 @@
 	</div>
 </div>
 <script>
-	mui('.mui-scroll-wrapper').scroll()
+	mui('.mui-scroll-wrapper').scroll();
+	mui('.find-content').on('tap','.list',function(){
+		
+	})
 </script>
 </body>
 </html>
