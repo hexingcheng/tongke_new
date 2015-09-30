@@ -9,7 +9,12 @@
 		<link href="../../css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/public/public.css" />
 		<script type="text/javascript" charset="utf-8">
-			mui.init();
+			mui.init({
+				preloadPages: [{
+					url: '../indexpage/activitydetail.html',
+					id: 'activitydetail'//预加载页面的子页面
+				}]
+			});
 		</script>
 		<style>
 			html,
@@ -181,7 +186,7 @@
 	<script type="text/javascript" src="../../js/utils/tools.js"></script>
 	<script type="text/html" id="ac-list">
 		{{each list}}
-		<div class="a-list" data-id = '{{$value.id}}'>
+		<div class="a-list" data-id='{{$value.id}}'>
 			<div class="l-title">{{$value.name}}</div>
 			<div class="l-charge">￥<span class="money">{{$value.score}}</span>起</div>
 			<div class="l-addr">
@@ -246,16 +251,25 @@
 			$('.tabitem').removeClass('active').eq(sort).addClass('active');
 			$(this).animate(param, 300);
 		})
+		 mui('.rla').on('tap', '.a-list', function() {
+			var id = this.getAttribute('data-id');
+			var param = {
+				listid: id
+			}
+			var detail = plus.webview.getWebviewById('activitydetail');
+			detail.show('slide-in-right',300);
+			mui.fire(detail,'renderdata',param)
+		})
 		 mui.plusReady(function() {
-		 	var c = plus.webview.currentWebview();
+			var c = plus.webview.currentWebview();
 			mui('.mui-scroll-wrapper').scroll();
-//			模拟数据
+			//			模拟数据
 			Ajax({
-				url:'/projects/list_projects'
-			},function(data){
+				url: '/projects/list_projects'
+			}, function(data) {
 				console.log(JSON.stringify(data))
 				var listdata = {
-					list:data.datas
+					list: data.datas
 				}
 				var html = template("ac-list", listdata);
 				$('.a-content').html(html);
@@ -267,23 +281,22 @@
 				$('.rla').height(h)
 				$('.tabview').height(h)
 				plus.navigator.closeSplashscreen();
-			},function(){
+			}, function() {
 				plus.navigator.closeSplashscreen();
 			})
-			
 			mui('body').on('scroll', '.mui-scroll', function(e) {
 				var scrollTop = $(this).position().top;
 				var opener = plus.webview.getLaunchWebview();
-//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
+				//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
 				if (scrollTop < 0 && Math.abs(scrollTop) > 200) {
-//					var temp = Math.abs(scrollTop) - 200;
-//					if(temp==50||temp>50){
-//						temp ==50;
-//						
-//					}
-//					c.setStyle({
-//						'top':50-temp
-//					})
+					//					var temp = Math.abs(scrollTop) - 200;
+					//					if(temp==50||temp>50){
+					//						temp ==50;
+					//						
+					//					}
+					//					c.setStyle({
+					//						'top':50-temp
+					//					})
 					mui.fire(opener, 'hideHead')
 				} else if (scrollTop > 0) {
 					mui.fire(opener, 'showHead')
