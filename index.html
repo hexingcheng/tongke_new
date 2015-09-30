@@ -94,7 +94,7 @@
 					preloads.push(item[i].getAttribute('data-riconforword'))
 				}
 				plus.geolocation.getCurrentPosition(function(pos){
-					console.log(JSON.stringify(pos))
+//					console.log(JSON.stringify(pos))
 					$('.addr').text(pos.address.city);
 //					$('.addr').text('上海')
 					$('.arrowdown').removeClass('mui-hidden');
