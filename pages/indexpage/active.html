@@ -162,7 +162,6 @@
 						<div class="rla">
 							<div class="tabview">
 								<div class="item a-content">
-									aa
 								</div>
 								<div class="item a-hot">
 									<div class="test">附近无最新动态</div>
@@ -182,15 +181,15 @@
 	<script type="text/javascript" src="../../js/utils/tools.js"></script>
 	<script type="text/html" id="ac-list">
 		{{each list}}
-		<div class="a-list">
-			<div class="l-title">{{$value.title}}</div>
-			<div class="l-charge">￥<span class="money">{{$value.charge}}</span>起</div>
+		<div class="a-list" data-id = '{{$value.id}}'>
+			<div class="l-title">{{$value.name}}</div>
+			<div class="l-charge">￥<span class="money">{{$value.score}}</span>起</div>
 			<div class="l-addr">
 				<div class="icon">
 					<span class="mui-icon mui-icon-location"></span>
 				</div>
 				<div class="rightover time-text">
-					{{$value.addr}}
+					{{$value.address}}
 				</div>
 			</div>
 			<div class="l-time">
@@ -198,11 +197,11 @@
 					<span class="mui-icon mui-icon-navigate"></span>
 				</div>
 				<div class="rightover addr-text">
-					{{$value.time}}
+					{{$value.starttime}}
 				</div>
 			</div>
 			<div class="interets">
-				<span class="peo-num">{{$value.num}}</span> 感兴趣
+				<span class="peo-num">{{$value.like}}</span> 感兴趣
 			</div>
 		</div>
 		{{/each}}
@@ -251,58 +250,27 @@
 		 	var c = plus.webview.currentWebview();
 			mui('.mui-scroll-wrapper').scroll();
 //			模拟数据
-//			Ajax({
-//				url:'/projects/get_comment_projects'
-//			})
-			var data = {
-				list: [{
-					title: '2015中国重庆世界旅游资源博览会',
-					charge: '100',
-					addr: '上海滨江森林公园',
-					time: '10月17日 周六 上午 8:00',
-					num: '3193'
-				}, {
-					title: '2015中国重庆世界旅游资源博览会',
-					charge: '100',
-					addr: '上海滨江森林公园',
-					time: '10月17日 周六 上午 8:00',
-					num: '3193'
-				}, {
-					title: '2015中国重庆世界旅游资源博览会',
-					charge: '100',
-					addr: '上海滨江森林公园',
-					time: '10月17日 周六 上午 8:00',
-					num: '3193'
-				}, {
-					title: '2015中国重庆世界旅游资源博览会',
-					charge: '100',
-					addr: '上海滨江森林公园',
-					time: '10月17日 周六 上午 8:00',
-					num: '3193'
-				}, {
-					title: '2015中国重庆世界旅游资源博览会',
-					charge: '100',
-					addr: '上海滨江森林公园',
-					time: '10月17日 周六 上午 8:00',
-					num: '3193'
-				}, {
-					title: '2015中国重庆世界旅游资源博览会',
-					charge: '100',
-					addr: '上海滨江森林公园',
-					time: '10月17日 周六 上午 8:00',
-					num: '3193'
-				}]
-			}
-			var html = template("ac-list", data);
-			$('.a-content').html(html);
-			var h1 = $('.a-hot').height();
-			var h2 = $('.a-content').height();
-			var h3 = $('.a-new').height();
-			var hs = [h1, h2, h3]
-			var h = max(hs)
-			$('.rla').height(h)
-			$('.tabview').height(h)
-			plus.navigator.closeSplashscreen();
+			Ajax({
+				url:'/projects/list_projects'
+			},function(data){
+				console.log(JSON.stringify(data))
+				var listdata = {
+					list:data.datas
+				}
+				var html = template("ac-list", listdata);
+				$('.a-content').html(html);
+				var h1 = $('.a-hot').height();
+				var h2 = $('.a-content').height();
+				var h3 = $('.a-new').height();
+				var hs = [h1, h2, h3]
+				var h = max(hs)
+				$('.rla').height(h)
+				$('.tabview').height(h)
+				plus.navigator.closeSplashscreen();
+			},function(){
+				plus.navigator.closeSplashscreen();
+			})
+			
 			mui('body').on('scroll', '.mui-scroll', function(e) {
 				var scrollTop = $(this).position().top;
 				var opener = plus.webview.getLaunchWebview();
