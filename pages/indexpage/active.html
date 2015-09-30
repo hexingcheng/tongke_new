@@ -28,13 +28,13 @@
 			}
 			.tabitem {
 				float: left;
-				height: 40px;
-				line-height: 40px;
+				height: 44px;
+				line-height: 44px;
 				padding: 0 20px;
 				color: #a1a1a1;
 			}
 			.tabs {
-				height: 40px;
+				height: 44px;
 				width: 222px;
 				margin: 0 auto;
 				overflow: hidden;
@@ -111,7 +111,7 @@
 				width: 300%;
 				z-index: 100;
 			}
-			.rla{
+			.rla {
 				position: relative;
 			}
 			.item {
@@ -119,10 +119,9 @@
 				float: left;
 				height: 100%;
 			}
-			
-			
 			/*test*/
-			.test{
+			
+			.test {
 				margin-top: 30px;
 				text-align: center;
 				color: #000000;
@@ -138,10 +137,10 @@
 						<div class="mui-slider">
 							<div class="mui-slider-group">
 								<div class="mui-slider-item">
-									<img src="../../img/slider/pic1.jpg" class="sliderpic" data-detail='' />
+									<img src="../../img/slider/pic2.jpg" class="sliderpic" data-detail='' />
 								</div>
 								<div class="mui-slider-item">
-									<img src="../../img/slider/pic2.jpg" class="sliderpic" data-detail='' />
+									<img src="../../img/slider/pic1.jpg" class="sliderpic" data-detail='' />
 								</div>
 								<div class="mui-slider-item">
 									<img src="../../img/slider/pic3.jpg" class="sliderpic" data-detail='' />
@@ -155,9 +154,9 @@
 					<div class="activity">
 						<div class="activitytabs">
 							<div class="tabs">
-								<div class="tabitem hot active" data-sort = '0'>热门</div>
-								<div class="tabitem near" data-sort = '1'>附近</div>
-								<div class="tabitem new" data-sort = '2'>动态</div>
+								<div class="tabitem hot active" data-sort='0'>热门</div>
+								<div class="tabitem near" data-sort='1'>附近</div>
+								<div class="tabitem new" data-sort='2'>动态</div>
 							</div>
 						</div>
 						<div class="rla">
@@ -166,7 +165,7 @@
 									aa
 								</div>
 								<div class="item a-hot">
-									<div class="test">附近无最新动态</div> 
+									<div class="test">附近无最新动态</div>
 								</div>
 								<div class="item a-new">
 									<div class="test">你的好友没有新动态</div>
@@ -212,45 +211,46 @@
 		mui('.tabs').on('tap', '.tabitem', function() {
 			var sortstart = parseInt($('.tabitem').filter('.active').attr('data-sort'));
 			var sortend = parseInt($(this).attr('data-sort'));
-			var gaps = sortend-sortstart;
+			var gaps = sortend - sortstart;
 			var aniparam = {};
-			if(gaps>0){
-				aniparam.left = '-='+gaps+'00%';
-			}else if(gaps<0){
-				aniparam.left = '+='+Math.abs(gaps)+'00%';
-			}else if(gaps==0){
+			if (gaps > 0) {
+				aniparam.left = '-=' + gaps + '00%';
+			} else if (gaps < 0) {
+				aniparam.left = '+=' + Math.abs(gaps) + '00%';
+			} else if (gaps == 0) {
 				return;
 			}
 			$('.tabitem').removeClass('active');
 			$(this).addClass('active');
-			$('.tabview').animate(aniparam,300)
+			$('.tabview').animate(aniparam, 300)
 		})
-		mui('.rla').on('dragend','.tabview',function(e){
+		 mui('.rla').on('dragend', '.tabview', function(e) {
 			var sort = parseInt($('.tabitem').filter('.active').attr('data-sort'));
 			var param = {};
-			
-			if(e.detail.direction=='left'){
-				sort+=1;
-				if(sort==3){
-					sort=2;
+			if (e.detail.direction == 'left') {
+				sort += 1;
+				if (sort == 3) {
+					sort = 2;
 					return;
 				}
 				param.left = "-=100%";
-			}else if(e.detail.direction=='right'){ 
-				sort-=1;
-				if(sort==-1){
-					sort==0
+			} else if (e.detail.direction == 'right') {
+				sort -= 1;
+				if (sort == -1) {
+					sort == 0
 					return;
 				}
 				param.left = "+=100%";
-			}else{
+			} else {
 				return;
 			}
-			$('.tabitem').removeClass('active').eq(sort).addClass('active'); 
-			$(this).animate(param,300);
+			$('.tabitem').removeClass('active').eq(sort).addClass('active');
+			$(this).animate(param, 300);
 		})
 		 mui.plusReady(function() {
+		 	var c = plus.webview.currentWebview();
 			mui('.mui-scroll-wrapper').scroll();
+//			模拟数据
 			var data = {
 				list: [{
 					title: '2015中国重庆世界旅游资源博览会',
@@ -295,28 +295,36 @@
 			var h1 = $('.a-hot').height();
 			var h2 = $('.a-content').height();
 			var h3 = $('.a-new').height();
-			var hs = [h1,h2,h3]
+			var hs = [h1, h2, h3]
 			var h = max(hs)
 			$('.rla').height(h)
 			$('.tabview').height(h)
 			plus.navigator.closeSplashscreen();
 			mui('body').on('scroll', '.mui-scroll', function(e) {
-				//				var scrollTop = $(this).position().top;
-				//				var slideHeigt = $().height();
-				//				var opener = plus.webview.getLaunchWebview();
-				//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
-				//				if (scrollTop < 0 && Math.abs(scrollTop) > 150) {
-				//					mui.fire(opener, 'hideHead')
-				//				} else if (scrollTop > 0) {
-				//					mui.fire(opener, 'showHead')
-				//				}
+				var scrollTop = $(this).position().top;
+				var opener = plus.webview.getLaunchWebview();
+//				console.log(Boolean(scrollTop < 0 && Math.abs(scrollTop)))
+				if (scrollTop < 0 && Math.abs(scrollTop) > 200) {
+//					var temp = Math.abs(scrollTop) - 200;
+//					if(temp==50||temp>50){
+//						temp ==50;
+//						
+//					}
+//					c.setStyle({
+//						'top':50-temp
+//					})
+					mui.fire(opener, 'hideHead')
+				} else if (scrollTop > 0) {
+					mui.fire(opener, 'showHead')
+				}
 			})
 		})
-		 function max(arr){
-		 	return arr.sort(function(a,b){
-		 		return b-a;
-		 	})[0];
-		 }
+
+		function max(arr) {
+			return arr.sort(function(a, b) {
+				return b - a;
+			})[0];
+		}
 	</script>
 
 </html>
