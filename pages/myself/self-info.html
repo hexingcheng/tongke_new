@@ -6,27 +6,45 @@
     <title></title>
     <link href="../../css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/public/head-foot.css"/>
     <script src="../../js/mui.min.js"></script>
     <style type="text/css">
     	.mui-scroll-wrapper {top: 44px;}
     	.share-to {display: inline-block;width: 44px;height: 44px;
     	text-align: center;line-height: 44px;}
     	.head-info-wrap {background: url(../../img/tiegui.jpg) no-repeat center center;
-    	height: 300px;color: #fff;text-align: center;}
-    	.head-info {}
-    	.head-img-row {height: 65px;width: 100%;}
+    	height: 220px;color: #fff;text-align: center;position: relative;}
+    	.head-info {position: absolute;width: 100%;bottom: 20px;}
+    	.head-img-row {height: 65px;width: 100%;margin-bottom: 5px;}
     	.head-img-box {width: 65px; height: 65px;border-radius: 50%;
     	overflow: hidden;background: #39BF9E;border: 1px solid #fff;margin: 0 auto;}
-    	
+    	.divide-line {width: 2px;height: 14px;display: inline-block;background: #fff;}
+    	.other-row {margin-top: 5px;}
+    	.inline-box {overflow: hidden;width: 70%;margin: 0 auto;}
+    	.icon-font {background: #ccc;display: inline-block;width: 25px;height: 25px;border-radius: 50%;
+					text-align: center;line-height: 25px;}
+    	.erweima {width: 50%;border-right: 1px solid #fff;padding-right: 8px;}
+    	.wexin {width: 50%;}
+    	.text-info {height: 25px;display: inline-block;line-height: 25px;}
+    	#edit {border-color: #E69A24;color: #E69A24;}
+    	#edit span {padding-right: 5px;}
+    	.entry-info-wrap {color: #666;}
+    	.mui-table-view-cell:after {left: 0;}
     </style>
 </head>
 <body>
 	
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<a class="iconfont icon-daochueps mui-pull-right share-to"></a>
-		<h1 class="mui-title">个人主页</h1>
+		<a class="iconfont icon-daochueps mui-pull-right right-icon"></a>
+		<h1 class="mui-title mui-text-left">个人主页</h1>
 	</header>
+	
+	<footer class="mui-bar mui-bar-footer" >
+		<button class="mui-btn mui-btn-outlined mui-btn-block" id="edit">
+			<span class="iconfont icon-iconfontbianji"></span>编辑
+		</button>
+	</footer>
 	
 	<div class="mui-content">
 		<div class="mui-scroll-wrapper">
@@ -44,29 +62,79 @@
 						</div>
 						<div class="worktype-row">
 							<div class="properties mui-ellipsis">
-								<span id="worktype">前端开发</span>
-								<span class="divide-line"></span>
 								<span id="company">阿里</span>
+								<span class="divide-line"></span>
+								<span id="worktype">前端开发</span>
 							</div>
 						</div>
 						<div class="other-row">
-							<div class="mui-pull-left erweima">
-								<span class="iconfont icon-iconfonterweima"></span>二维码
+							<div class="inline-box">
+								<div class="mui-pull-left erweima">
+									<span class="iconfont icon-iconfonterweima icon-font"></span>
+									<span class="text-info">二维码</span>
+								</div>
+								<div class="mui-pull-left wexin">
+									<span class="mui-icon mui-icon-chatbubble icon-font"></span>
+									<span class="text-info">微信</span>
+								</div>
 							</div>
-							<div class="mui-pull-left wexin">
-								<span class="mui-icon mui-icon-chatbubble"></span>二维码
-							</div>
+							
 						</div>
 					</div>
 				</div>
 				
+				<div class="entry-info-wrap">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-divider">联系方式</li>
+						<li class="mui-table-view-cell">
+							<span class="title-info">同客号:</span>
+							<span class="tongke-id-box">
+								<span id="tongke-id">未设置</span>
+							</span>
+						</li>
+						<li class="mui-table-view-cell">
+							<span class="title-info">手机:</span>
+							<span id="cell-phone">11223344556</span>
+						</li>
+						<li class="mui-table-view-cell">
+							<span class="title-info">地区:</span>
+							<span id="cell-phone">未设置</span>
+						</li>
+						<li class="mui-table-view-cell">
+							<span class="title-info">邮箱:</span>
+							<span id="cell-phone">未设置</span>
+						</li>
+						<li class="mui-table-view-divider">标签</li>
+						<li class="mui-table-view-cell">
+							<span>创业</span>
+							<span>互联网</span>
+						</li>
+						<li class="mui-table-view-divider">活动记录</li>
+						<li class="mui-table-view-cell">
+							您还没有参加过活动
+						</li>
+						<li class="mui-table-view-divider">背景</li>
+						<li class="mui-table-view-cell">
+							您还没有添加背景信息
+						</li>
+						<li class="mui-table-view-divider">爱好</li>
+						<li class="mui-table-view-cell">
+							未设置
+						</li>
+					</ul>
+				</div>
 				
 			</div>
 		</div>
 	</div>
 	
+	
+	
     <script>
       	mui.init();
+      	mui.plusReady(function(){
+      		mui(".mui-scroll-wrapper").scroll();
+      	})
     </script>
 </body>
 </html>
