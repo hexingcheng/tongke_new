@@ -117,37 +117,39 @@
 
 	<body>
 		<div class="mui-content">
-			<div class="msgcontent">
-				<div class="addfriend h80 bgcf borb">
-					<div class="850 pullleft w60">
-						<div class="circle color1">
-							<span class="mui-icon mui-icon-personadd"></span>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div class="msgcontent">
+						<div class="addfriend h80 bgcf borb">
+							<div class="850 pullleft w60">
+								<div class="circle color1">
+									<span class="mui-icon mui-icon-personadd"></span>
+								</div>
+							</div>
+							<div class="h80 clearfix friend">
+								好友请求
+								<div class="entericon">
+									<span class="mui-icon mui-icon-arrowright"></span>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="h80 clearfix friend">
-						好友请求
-						<div class="entericon">
-							<span class="mui-icon mui-icon-arrowright"></span>
+						<div class="msgtips h80 bgcf borb">
+							<div class="h80 pullleft w60">
+								<div class="circle color2">
+									<span class="mui-icon mui-icon-chat"></span>
+								</div>
+							</div>
+							<div class="h80 clearfix tips">
+								消息提醒
+								<div class="entericon">
+									<span class="mui-icon mui-icon-arrowright"></span>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="msgtips h80 bgcf">
-					<div class="h80 pullleft w60">
-						<div class="circle color2">
-							<span class="mui-icon mui-icon-chat"></span>
-						</div>
-					</div>
-					<div class="h80 clearfix tips">
-						消息提醒
-						<div class="entericon">
-							<span class="mui-icon mui-icon-arrowright"></span>
-						</div>
-					</div>
-				</div>
-				<div class="commu">
-					<div class="h50 com">对话</div>
-					<div class="commu-content">
-						<!--<div class="msg h80 bgcf borb">
+						<div class="commu">
+							<div class="h50 com">对话</div>
+							<div class="commu-content">
+								<!--<div class="msg h80 bgcf borb">
 							<div class="h80 pullleft w60">
 								<div class="circle">
 									<img src="../../img/log/user-photo.png" />
@@ -159,6 +161,8 @@
 							</div>
 							<div class="msgtime">前天</div>
 						</div>-->
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -184,16 +188,17 @@
 		</script>
 		<script>
 			mui.plusReady(function() {
+				mui('.mui-scroll-wrapper').scroll();
 				var data = {
 					list: [{
 						'title': '同客小秘书',
 						'con': '欢迎加入同客，你现在可以在资料中查看你的详细情况。',
 						'time': '2015-9-30'
-					},{
+					}, {
 						'title': 'leexinqee',
 						'con': '添加好有成功',
 						'time': '2015-9-30'
-					},{
+					}, {
 						'title': '一起去支教',
 						'con': '你以加入该群',
 						'time': '2015-9-30'
