@@ -9,12 +9,7 @@
 		<link href="../../css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/public/public.css" />
 		<script type="text/javascript" charset="utf-8">
-			mui.init({
-				preloadPages: [{
-					url: '../indexpage/activitydetail.html',
-					id: 'activitydetail'//预加载页面的子页面
-				}]
-			});
+			mui.init();
 		</script>
 		<style>
 			html,
@@ -212,55 +207,9 @@
 		{{/each}}
 	</script>
 	<script>
-		mui('.tabs').on('tap', '.tabitem', function() {
-			var sortstart = parseInt($('.tabitem').filter('.active').attr('data-sort'));
-			var sortend = parseInt($(this).attr('data-sort'));
-			var gaps = sortend - sortstart;
-			var aniparam = {};
-			if (gaps > 0) {
-				aniparam.left = '-=' + gaps + '00%';
-			} else if (gaps < 0) {
-				aniparam.left = '+=' + Math.abs(gaps) + '00%';
-			} else if (gaps == 0) {
-				return;
-			}
-			$('.tabitem').removeClass('active');
-			$(this).addClass('active');
-			$('.tabview').animate(aniparam, 300)
-		})
-		 mui('.rla').on('dragend', '.tabview', function(e) {
-			var sort = parseInt($('.tabitem').filter('.active').attr('data-sort'));
-			var param = {};
-			if (e.detail.direction == 'left') {
-				sort += 1;
-				if (sort == 3) {
-					sort = 2;
-					return;
-				}
-				param.left = "-=100%";
-			} else if (e.detail.direction == 'right') {
-				sort -= 1;
-				if (sort == -1) {
-					sort == 0
-					return;
-				}
-				param.left = "+=100%";
-			} else {
-				return;
-			}
-			$('.tabitem').removeClass('active').eq(sort).addClass('active');
-			$(this).animate(param, 300);
-		})
-		 mui('.rla').on('tap', '.a-list', function() {
-			var id = this.getAttribute('data-id');
-			var param = {
-				listid: id
-			}
-			var detail = plus.webview.getWebviewById('activitydetail');
-			detail.show('slide-in-right',300);
-			mui.fire(detail,'renderdata',param)
-		})
-		 mui.plusReady(function() {
+		mui.plusReady(function() {
+			var pre = ['../indexpage/activitydetail.html']
+			preload(pre)
 			var c = plus.webview.currentWebview();
 			mui('.mui-scroll-wrapper').scroll();
 			//			模拟数据
@@ -301,6 +250,54 @@
 				} else if (scrollTop > 0) {
 					mui.fire(opener, 'showHead')
 				}
+			})
+			mui('.tabs').on('tap', '.tabitem', function() {
+				var sortstart = parseInt($('.tabitem').filter('.active').attr('data-sort'));
+				var sortend = parseInt($(this).attr('data-sort'));
+				var gaps = sortend - sortstart;
+				var aniparam = {};
+				if (gaps > 0) {
+					aniparam.left = '-=' + gaps + '00%';
+				} else if (gaps < 0) {
+					aniparam.left = '+=' + Math.abs(gaps) + '00%';
+				} else if (gaps == 0) {
+					return;
+				}
+				$('.tabitem').removeClass('active');
+				$(this).addClass('active');
+				$('.tabview').animate(aniparam, 300)
+			})
+			mui('.rla').on('dragend', '.tabview', function(e) {
+				var sort = parseInt($('.tabitem').filter('.active').attr('data-sort'));
+				var param = {};
+				if (e.detail.direction == 'left') {
+					sort += 1;
+					if (sort == 3) {
+						sort = 2;
+						return;
+					}
+					param.left = "-=100%";
+				} else if (e.detail.direction == 'right') {
+					sort -= 1;
+					if (sort == -1) {
+						sort == 0
+						return;
+					}
+					param.left = "+=100%";
+				} else {
+					return;
+				}
+				$('.tabitem').removeClass('active').eq(sort).addClass('active');
+				$(this).animate(param, 300);
+			})
+			mui('.rla').on('tap', '.a-list', function() {
+				var id = this.getAttribute('data-id');
+				var param = {
+					listid: id
+				}
+				var detail = plus.webview.getWebviewById('activitydetail');
+				detail.show('slide-in-right', 300);
+				mui.fire(detail, 'renderdata', param)
 			})
 		})
 

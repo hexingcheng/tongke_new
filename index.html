@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -95,7 +94,9 @@
 					preloads.push(item[i].getAttribute('data-riconforword'))
 				}
 				plus.geolocation.getCurrentPosition(function(pos){
+					console.log(JSON.stringify(pos))
 					$('.addr').text(pos.address.city);
+//					$('.addr').text('上海')
 					$('.arrowdown').removeClass('mui-hidden');
 				},function(){},{
 					provider:'baidu',
