@@ -130,11 +130,16 @@
 			</div>
 		</div>
 	</div>
-	
+	<script src="../../js/libs/jquery.min.js"></script>
     <script>
       	mui.init();
       	mui.plusReady(function(){
       		mui(".mui-scroll-wrapper").scroll();
+      		
+      		// 编辑
+      		$("#edit").on("tap", function(){
+      			openWindow("./edit-self-info.html");
+      		})
       	})
     </script>
 </body>
