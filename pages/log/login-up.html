@@ -151,7 +151,7 @@
 				}
 				console.log(JSON.stringify(info))
 				Ajax({
-					url : "/members/logins",
+					url : "/members/login_members",
 					data : info
 				}, function(data){
 					console.log(JSON.stringify(data))
@@ -197,7 +197,7 @@
       					$this.html("注册中...")
       					console.log(typeof infos+"  "+JSON.stringify(infos))
       					Ajax({
-      						url : "/members/registers",
+      						url : "/members/register_members",
       						data : infos
       					}, function(data){
       						console.log(JSON.stringify(data))
