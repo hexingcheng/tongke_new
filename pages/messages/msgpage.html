@@ -1,62 +1,208 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title data-right-icon = ''>消息</title>
-    <script src="../../js/mui.min.js"></script>
-    <link href="../../css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
-    <style>
-    	html,body{
-    		background-color: #FFFFFF;
-    	}
-    	.w60{
-    		width: 60px;
-    	}
-    	.h50{
-    		height: 50px;
-    	}
-    	.h80{
-    		height: 80px;
-    	}
-    	.pullleft{
-    		float: left;
-    	}
-    	.clearfix{
-    		overflow: hidden;
-    	}
-    	.bgcf{
-    		background-color: #FFFFFF;
-    	}
-    	.addfriend .msgtips{
-    		overflow: hidden;
-    	}
-    	.borb{
-    		border-bottom: 1px solid #e0e0e1;
-    	}
-    </style>
-</head>
-<body>
-<div class="mui-content">
-	<div class="msgcontent">
-		<div class="addfriend h50 bgcf borb">
-			<div class="h50 pullleft w60"></div>
-			<div class="h50 clearfix"></div>
-		</div>
-		<div class="msgtips h50 bgcf">
-			<div class="h50 pullleft w60"></div>
-			<div class="h50 clearfix"></div>
-		</div>
-		<div class="commu">
-			<div>对话</div>
-			<div class="commu-content">
-				<div></div>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title data-right-icon=''>消息</title>
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+		<style>
+			html,
+			body {
+				background-color: #FFFFFF;
+			}
+			.w60 {
+				width: 60px;
+			}
+			.h50 {
+				height: 50px;
+			}
+			.h80 {
+				height: 80px;
+			}
+			.pullleft {
+				float: left;
+			}
+			.clearfix {
+				overflow: hidden;
+			}
+			.bgcf {
+				background-color: #FFFFFF;
+			}
+			.addfriend,
+			.msgtips {
+				overflow: hidden;
+				position: relative;
+			}
+			.borb {
+				border-bottom: 1px solid #e0e0e1;
+			}
+			.circle {
+				width: 40px;
+				height: 40px;
+				margin: 20px 10px;
+				border-radius: 50%;
+				color: #FFFFFF;
+				line-height: 40px;
+				text-align: center;
+			}
+			.color1 {
+				background-color: #7ace78;
+			}
+			.color2 {
+				background-color: #ff933b;
+			}
+			.entericon {
+				color: #9b9b9b;
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				top: 15px;
+				right: 0px;
+			}
+			.friend,
+			.tips {
+				line-height: 80px;
+				color: #333333;
+			}
+			.com {
+				line-height: 50px;
+				padding-left: 15px;
+				background-color: #f9f9fa;
+				color: #3c3c3c;
+			}
+			.msg {
+				overflow: hidden;
+				position: relative;
+			}
+			.circle img {
+				width: 40px;
+				height: 40px;
+				display: block;
+				border-radius: 50%;
+			}
+			.msgtitle {
+				color: #333333;
+				margin-top: 10px;
+			}
+			.msgcon {
+				color: #888888;
+				margin-bottom: 10px;
+				font-size: 14px;
+			}
+			.msgtitle,
+			.msgcon {
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			.msgtime {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				color: #8e8e8e;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="msgcontent">
+				<div class="addfriend h80 bgcf borb">
+					<div class="850 pullleft w60">
+						<div class="circle color1">
+							<span class="mui-icon mui-icon-personadd"></span>
+						</div>
+					</div>
+					<div class="h80 clearfix friend">
+						好友请求
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+				<div class="msgtips h80 bgcf">
+					<div class="h80 pullleft w60">
+						<div class="circle color2">
+							<span class="mui-icon mui-icon-chat"></span>
+						</div>
+					</div>
+					<div class="h80 clearfix tips">
+						消息提醒
+						<div class="entericon">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+				</div>
+				<div class="commu">
+					<div class="h50 com">对话</div>
+					<div class="commu-content">
+						<!--<div class="msg h80 bgcf borb">
+							<div class="h80 pullleft w60">
+								<div class="circle">
+									<img src="../../img/log/user-photo.png" />
+								</div>
+							</div>
+							<div class="clearfix h80">
+								<div class="msgtitle">同客小秘书</div>
+								<div class="msgcon">欢迎加入同客，现在可以在动中查看。</div>
+							</div>
+							<div class="msgtime">前天</div>
+						</div>-->
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</body>
+		<script src="../../js/utils/tools.js"></script>
+		<script type="text/javascript" src="../../js/libs/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/libs/template.js"></script>
+		<script type="text/html" id="msg">
+			{{each list}}
+			<div class="msg h80 bgcf borb">
+				<div class="h80 pullleft w60">
+					<div class="circle">
+						<img src="../../img/log/user-photo.png" />
+					</div>
+				</div>
+				<div class="clearfix h80">
+					<div class="msgtitle">{{$value.title}}</div>
+					<div class="msgcon">{{$value.con}}</div>
+				</div>
+				<div class="msgtime">{{$value.time}}</div>
+			</div>
+			{{/each}}
+		</script>
+		<script>
+			mui.plusReady(function() {
+				var data = {
+					list: [{
+						'title': '同客小秘书',
+						'con': '欢迎加入同客，你现在可以在资料中查看你的详细情况。',
+						'time': '2015-9-30'
+					},{
+						'title': 'leexinqee',
+						'con': '添加好有成功',
+						'time': '2015-9-30'
+					},{
+						'title': '一起去支教',
+						'con': '你以加入该群',
+						'time': '2015-9-30'
+					}]
+				}
+				var html = template("msg", data);
+				$('.commu-content').html(html)
+			})
+		</script>
+	</body>
+
 </html>
