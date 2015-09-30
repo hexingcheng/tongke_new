@@ -30,7 +30,7 @@ function iflog(){
 			alert('something error')
 		})
 	}else{
-		openWindow('./pages/log/log-first.html')
+		openWindow('./pages/log/login-up.html')
 	}
 	
 }
