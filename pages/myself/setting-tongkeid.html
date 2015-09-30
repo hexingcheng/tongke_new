@@ -5,14 +5,34 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
     <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../../css/public/head-foot.css"/>
     <script src="../../js/mui.min.js"></script>
+    <style type="text/css">
+    	.mui-content>.mui-table-view:first-child {margin-top: 0;}
+    	#tongke {margin-bottom: 0;padding: 10px 0;border: 0;}
+    	.mui-table-view-divider:nth-child(1) {padding: 10px 15px;font-size: 16px;line-height: 1.8em;}
+    	.mui-table-view-divider:nth-child(2) {background: #fff;padding: 0 15px;}
+    	.button-group {margin-top: 30px;}
+    </style>
 </head>
 <body>
 	
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">设置同客号</h1>
+		<h1 class="mui-title mui-text-left">设置同客号</h1>
 	</header>
+	
+	<div class="mui-content">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-divider">设置自己专有的同客账号，方便别人找到你</li>
+			<li class="mui-table-view-divider">
+				<input type="text" name="tongke" id="tongke" placeholder="同客号" />
+			</li>
+		</ul>
+		<div class="button-group">
+			<button class="mui-btn mui-btn-block btn-color">确定</button>
+		</div>
+	</div>
 	
     <script>
       	mui.init();

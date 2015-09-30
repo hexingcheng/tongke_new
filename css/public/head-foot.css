@@ -10,6 +10,13 @@ header.mui-bar {
 	text-align: center;
 	line-height: 44px;
 }
+.mui-bar .mui-btn-link {
+	color: #fff;
+	font-weight: 600;
+}
+.mui-bar .mui-btn.mui-pull-right {
+	margin-left: 0;
+}
 header a {
 	font-weight: bold;
 	color: #fff;
@@ -25,7 +32,18 @@ footer.mui-bar~.mui-content > .mui-scroll-wrapper {
 	bottom: 44px;
 }
 
-
+/* footer部分的按钮  */
+.button-group {width: 100%;}
+.button-group .mui-btn.mui-btn-block {
+	width: 90%;
+	margin: 0 auto;
+	padding: 7px 0;
+	font-size: 16px;
+}
+.button-group .btn-color {
+	background-color: #39bf9e;
+	color: #fff;
+}
 
 
 
