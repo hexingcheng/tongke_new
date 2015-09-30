@@ -1,0 +1,41 @@
+header.mui-bar {
+	padding-right: 0;
+	background-color: #39bf9e;
+	box-shadow: 1px 0 0 #aaa;
+}
+.right-icon {
+	display: inline-block;
+	width: 44px;
+	height: 44px;
+	text-align: center;
+	line-height: 44px;
+}
+header a {
+	font-weight: bold;
+	color: #fff;
+}
+.mui-bar .mui-title {
+	color: #fff;
+	font-weight: bold;
+}
+header.mui-bar~.mui-content > .mui-scroll-wrapper {
+	top: 44px;
+}
+footer.mui-bar~.mui-content > .mui-scroll-wrapper {
+	bottom: 44px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

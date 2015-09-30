@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../../css/log/log-common.css"/>
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css"/>
+    <script src="../../js/mui.min.js"></script>
+   	<style type="text/css">
+   		.green {color: #FF946E;}
+   		.mui-slider {width: 90%;margin: 30px auto 20px;}
+   		.mui-segmented-control {border-color: #FF946E;}
+   		.mui-segmented-control .mui-control-item.mui-active {background-color: #FF946E;}
+   		.mui-segmented-control .mui-control-item {border-color: #FF946E;color: #FF946E;font-weight: 600;}
+   		
+   		.mui-input-row {border-bottom: 1px solid #FF946E;}
+   		.mui-input-row:last-child {border: none;}
+   		.form-card {background: #fff;border-radius: 5px;overflow: hidden;padding: 0 15px;box-shadow: 1px 1px 5px #ccc;}
+   		.login-container,
+   		.logup-container {padding: 0 15px;}
+   		.login-container .mui-input-row label {padding: 10px 0px;width: 13%;text-align: center;}
+   		.login-container .mui-input-row label span {font-weight: 600;font-size: 20px;}
+   		.login-container .mui-input-row label~input {width: 87%;padding-left: 5px;}
+   		
+   		.logup-container .mui-input-row label {color: #aaa;width: 20%;padding: 12px 0 7px 3px;font-weight: bold;}
+   		.logup-container .mui-input-row label~input {width: 80%;padding-left: 10px;}
+   		.logup-container .button-group {margin-top: 50px;}
+   		#forgot-pwd {padding: 2px 10px;font-size: 12px;border-radius: 50px / 50px;}
+   		.forgot-pwd-wrap {padding: 15px 0 30px 0;}
+   		.mui-btn.mui-btn-block {width: 100%;background-color: #FF946E;}
+   		.code-wrap {width: 30%;}
+   		.input-box {position: absolute;left: 20%;right: 30%;height: 100%;margin-right: 0;}
+   		.input-box input {margin: 0;border: none;padding: 10px;}
+   		#get-code {width: 100%;padding: 5px 0px;border-radius: 47px / 53px;background-color: #FF946E;color: #fff;margin-top: 6px;border: 0;}
+   	</style>
+</head>
+<body>
+
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title mui-text-left">登录</h1>
+	</header>
+	
+	<div class="mui-content">
+		<div id="slider" class="mui-slider">
+			<div id="sliderControl" class="mui-segmented-control">
+				<a id="signin-btn" class="mui-control-item mui-active" href="#item-one">登录</a>
+				<a id="signup-btn" class="mui-control-item" href="#item-two">手机注册</a>
+			</div>
+		</div>
+		
+		<div class="mui-slider-group content-box">
+			<div id="item-one" class="mui-slider-item mui-control-content mui-active">
+				<div class="login-container">
+					<div class="form-card">
+						<form class="mui-form-group">
+							<div class="mui-input-row">
+								<label><span class="iconfont icon-iconfontshouji1 green"></span></label>
+								<input type="text" id="login-phone" placeholder="您的手机号码">
+							</div>
+							<div class="mui-input-row">
+								<label><span class="mui-icon mui-icon-locked green"></span></label>
+								<input type="password" id="login-pwd" placeholder="密码不少于6个字符">
+							</div>
+						</form>
+					</div>
+					<div class="forgot-pwd-wrap mui-text-right">
+						<button id="forgot-pwd" class="mui-btn btn-color mui-btn-outlined">忘记密码</button>
+					</div>
+					<div class="button-group">
+						<button id="action-login" class="mui-btn btn-color mui-btn-block">登录</button>
+					</div>
+				</div>
+			</div>
+			
+			<div id="item-two" class="mui-slider-item mui-control-content">
+				<div class="logup-container">
+					<div class="form-card">
+						<form class="mui-form-group">
+							<div class="mui-input-row">
+								<span class="mui-pull-right code-wrap">
+									<button type="button" id="get-code" class="mui-btn mui-btn-outlined">发送验证码</button>
+								</span>
+								<label>+86</label>
+								<div class="input-box">
+									<input type="text" id="logup-phone" placeholder="手机号">
+								</div>
+							</div>
+							<div class="mui-input-row">
+								<label>验证码</label>
+								<input type="text" id="logup-code" placeholder="验证码">
+							</div>
+							<div class="mui-input-row">
+								<label>密码</label>
+								<input type="password" id="logup-pwd" placeholder="密码">
+							</div>
+						</form>
+					</div>
+					<div class="button-group">
+						<button id="action-logup" class="mui-btn btn-color mui-btn-block">注册</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../js/libs/jquery.min.js"></script>
+	<script src="../../js/utils/tools.js"></script>
+	<script>
+      	mui.init();
+      	mui.plusReady(function(){
+      		
+      		// 清空数据
+      		$("#signin-btn").on("tap", function(){
+      			$("#item-two").find("input").val("");
+      		})
+      		$("#signup-btn").on("tap", function(){
+      			$("#item-one").find("input").val("");
+      		})
+      		
+      		/**
+      		 * 登录部分
+      		 * */
+      		// 登录
+			$("#action-login").on("click",function(){
+				var phone = formateval($("#login-phone").val());
+				var pwd = formateval($("#login-pwd").val());
+				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
+				var $this = $(this);
+				if(phone){
+					if(phone.length != 11){
+						mui.toast("手机号输入错误")
+						$("#login-phone").val("");
+						return;
+					}
+				} else {
+					mui.toast("手机号不能为空")
+					return;
+				}
+				if(pwd.length < 6 || !repw.test(pwd)){
+					mui.toast("请确定密码输入合法");
+					$("#login-pwd").val("");
+					return;
+				}
+				$this.html("登录中...");
+				$this.attr("disabled", true);
+				var info = {
+					username : phone,
+					password : pwd
+				}
+				
+				Ajax({
+					url : "/members/logins",
+					data : info
+				}, function(data){
+					console.log(JSON.stringify(data))
+					
+					var logupInfo = JSON.stringify(info);
+					plus.storage.setItem("userinfo", info)
+					// 登录成功后对页面跳转的处理
+					openWindow("../../index.html");
+				}, function(data){
+					console.log(JSON.stringify(data))
+					$this.html("登录");
+					$this.attr("disabled", false);
+				})
+				
+			})
+      		
+      		// 登录信息验证
+			function login(valobj, callback){
+				// 发送ajax到后台，判断用户登录是否成功
+				
+			}
+      		
+      		/**
+      		 * 注册部分
+      		 * */
+      		// 注册按钮操作
+      		$("#action-logup").on("tap", function(){
+      			var $this = $(this);
+      			var info = {
+      				mobile : formateval($("#logup-phone").val()),
+      				mobilecode : formateval($("#logup-code").val()),
+      				password : formateval($("#logup-pwd").val()),
+      				typesid : 1,
+      				username : "leexinqee",
+      				vpassword : "123456"
+      			}
+      			logup(info, function(data, infos){
+      				if(data){
+      					mui.toast(data)
+      				}
+      				if(infos){
+      					$this.attr("disabled", true);
+      					$this.html("注册中...")
+      					console.log(typeof infos+"  "+JSON.stringify(infos))
+      					Ajax({
+      						url : "/members/registers",
+      						data : infos
+      					}, function(data){
+      						console.log(JSON.stringify(data))
+      						plus.storage.setItem("userinfo", JSON.stringify(infos));
+      						openWindow("../../index.html");
+      					}, function(err){
+      						console.log(JSON.stringify(err))
+      						$this.attr("disabled", false);
+      						$this.html("注册")
+      						$("#get-code").html("重新发送");
+      						$("#get-code").attr("disabled", false);
+      					})
+      				}
+      			})
+      		})
+      		
+      		// 注册函数
+      		function logup(valobj, callback){
+      			var reph = /^[0-9]{11}$/;
+				var repw = /^[\\.a-zA-Z0-9_]{6,}$/;
+				if(!reph.test(valobj.mobile)){
+					callback("只允许中国范围内的手机号码");
+					return;
+				}
+				if(valobj.password.length < 6){
+					callback("注册密码不能小于六位");
+					return;
+				} else if(!repw.test(valobj.password)){
+					callback("密码中包含非法字符");
+					return;
+				}
+				if(!(valobj.mobile && valobj.mobilecode && valobj.password)){
+					callback("请完善注册内容");
+					return;
+				}
+				callback(null, valobj);
+      		}
+      		
+      		// 获取验证码
+      		var time = 60;
+      		var timer = null;
+      		$("#get-code").on("tap", function(){
+      			var $this = $(this);
+      			var phone = formateval($("#logup-phone").val());
+      			if(!phone || phone.length != 11){
+      				mui.toast("请输入合法的手机号码")
+      			} else {
+      				timer = setInterval(function(){
+      					if(time != 0){
+	  						$this.html((time--) + "s");
+      					} else {
+      						$this.attr("disabled", false);
+      						$this.html("重新发送");
+      					}
+  					},1000)
+      				$this.attr("disabled", true);
+      				Ajax({
+      					url : "/publics/smscodes",
+      					data : {
+      						mobile : phone
+      					}
+      				}, function(data){
+      					mui.toast("请求发送成功");
+      				}, function(err){
+      					$this.attr("disabled", false);
+      					clearInterval(timer);
+      					$this.html("重新发送");
+      				})
+      			}
+      		})
+      		
+      		// 
+      		fixedNum("#login-phone");
+      		fixedNum("#logup-phone");
+      		fixedNum("#logup-code");
+      		
+      		// 解决部分手机number类型的时候不出现placeholder属性值
+      		function fixedNum(selector){
+      			$(selector).on("focus", function(){
+	      			$(this).attr("type", "number");
+	      		})
+	      		$(selector).on("blur", function(){
+	      			$(this).attr("type", "text");
+	      		})
+      		}
+      		
+      		// 字符串处理
+      		function formateval(str){
+      			return $.trim(str);
+      		}
+      	})
+    </script>
+</body>
+</html>
