@@ -45,10 +45,6 @@
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">同客</span>
 			</a>
-			<a class="mui-tab-item" href="./pages/friends/friendspage.html" data-right-icon='mui-icon mui-icon-personadd mui-pull-right' data-riconforword='./pages/friends/addfriend.html'>
-				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">人脉</span>
-			</a>
 			<a class="mui-tab-item" href="./pages/messages/msgpage.html" data-right-icon='mui-icon mui-icon-chatbubble mui-pull-right' data-riconforword='./pages/messages/newmsg.html'>
 				<span class="mui-icon mui-icon-chat">
 					<!--<span class="mui-badge"> 1</span>-->
@@ -68,7 +64,7 @@
 		<script type="text/javascript" src="js/libs/jquery.min.js" ></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
-			var subpages = ['./pages/indexpage/active.html', './pages/friends/friendspage.html', './pages/messages/msgpage.html', './pages/find/findpage.html', './pages/myself/myselfpage.html'];
+			var subpages = ['./pages/indexpage/active.html', './pages/messages/msgpage.html', './pages/find/findpage.html', './pages/myself/myselfpage.html'];
 			var subpage_style = {
 				top: '44px',
 				bottom: '50px' 
@@ -77,9 +73,8 @@
 			var first = null;
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				
 				var self = plus.webview.currentWebview();
-				for (var i = 0; i < 5; i++) {
+				for (var i = 0; i < 4; i++) {
 					var temp = {};
 					var start = subpages[i].lastIndexOf('/');
 					var end = subpages[i].indexOf('.html');

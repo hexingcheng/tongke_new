@@ -146,10 +146,10 @@
 				$this.html("登录中...");
 				$this.attr("disabled", true);
 				var info = {
-					username : phone,
+					mobile  : phone,
 					password : pwd
 				}
-				
+				console.log(JSON.stringify(info))
 				Ajax({
 					url : "/members/logins",
 					data : info
@@ -183,10 +183,10 @@
       			var info = {
       				mobile : formateval($("#logup-phone").val()),
       				mobilecode : formateval($("#logup-code").val()),
-      				password : formateval($("#logup-pwd").val()),
-      				typesid : 1,
-      				username : "leexinqee",
-      				vpassword : "123456"
+      				password : formateval($("#logup-pwd").val())
+//    				typesid : 1,
+//    				username : "leexinqee"+Math.random(),
+//    				vpassword : "123456"
       			}
       			logup(info, function(data, infos){
       				if(data){
@@ -202,7 +202,7 @@
       					}, function(data){
       						console.log(JSON.stringify(data))
       						plus.storage.setItem("userinfo", JSON.stringify(infos));
-      						openWindow("../../index.html");
+      						openWindow("./logup-next.html");
       					}, function(err){
       						console.log(JSON.stringify(err))
       						$this.attr("disabled", false);

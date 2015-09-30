@@ -18,7 +18,7 @@ function iflog(){
 		var phone = userinfo.mobile;
 		var pwd = userinfo.password;
 		var data = {
-			username:phone,
+			mobile:phone,
 			password:pwd
 		}
 		Ajax({
