@@ -47,7 +47,7 @@
 					<div class="head-info">
 						<div class="head-img-row">
 							<div class="head-img-box">
-								<img src="../../img/log/user-photo.png" width="100%"/>
+								<img class="choose-headimg" src="../../img/log/user-photo.png" width="100%"/>
 							</div>
 						</div>
 						<div class="nickname-row">
@@ -130,7 +130,26 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 选取图片 -->
+	<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell" id="take-photo">
+				<span>拍照</span>
+			</li>
+			<li class="mui-table-view-cell" id="choose-pic">
+				<span>从相册中选取</span>
+			</li>
+		</ul>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<a href="#picture"><b>取消</b></a>
+			</li>
+		</ul>
+	</div>
+	
 	<script src="../../js/libs/jquery.min.js"></script>
+	<script src="../../js/utils/tools.js"></script>
     <script>
       	mui.init();
       	mui.plusReady(function(){
@@ -139,6 +158,11 @@
       		// 编辑
       		$("#edit").on("tap", function(){
       			openWindow("./edit-self-info.html");
+      		})
+      		
+      		// 选取头像
+      		$(".choose-headimg").on("tap", function(){
+      			mui("#picture").popover("toggle");
       		})
       	})
     </script>

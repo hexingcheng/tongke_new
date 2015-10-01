@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="self-info-common.css"/>
     <script src="../../js/mui.min.js"></script>
     <style type="text/css">
+    	header.mui-bar {padding: 0 10px;}
     	.head-info-wrap {height: 160px;}
     	.mui-navigate-right {overflow: hidden;margin-right: 20px;}
-    	.item-bar-box {width: 75%;}
-    	.label-box {width: 25%;}
+    	.item-bar-box {width: 75%;color: #999;font-size: 14px;}
+    	.label-box {width: 25%;color: #aaa;}
     	#add-label {padding: 0 10px;color: #aaa;font-size: 16px;}
     	.label-tap {padding: 3px 7px 3px 15px;}
     	.remove-icon {font-size: 20px;margin-left: -7px;vertical-align: -5%;}
+    	
+    	.left-title {width: 40%;}
+		.add-box {width: 60%;font-size: 14px;}
+		.add-box .mui-icon-plusempty {font-size: 18px;}
+		.add-box button {color: #7ACE78;padding: 0;}
     </style>
 </head>
 <body>
@@ -34,7 +40,7 @@
 					<div class="head-info">
 						<div class="head-img-row">
 							<div class="head-img-box">
-								<img src="../../img/log/user-photo.png" width="100%"/>
+								<img src="../../img/log/user-photo.png" width="100%" class="choose-headimg"/>
 							</div>
 						</div>
 					</div>
@@ -122,12 +128,6 @@
 							</span>
 						</li>
 						
-						<style type="text/css">
-							.left-title {width: 40%;}
-							.add-box {width: 60%;font-size: 14px;}
-							.add-box .mui-icon-plusempty {font-size: 18px;}
-							.add-box button {color: #7ACE78;padding: 0;}
-						</style>
 						
 						<li class="mui-table-view-divider">背景</li>
 						<li class="mui-table-view-cell">
@@ -141,20 +141,77 @@
 						</li>
 						<li class="mui-table-view-cell">
 						    <div class="mui-navigate-right">
-						    	<div class="label-box mui-pull-left"></div>
-						      	<div class="item-bar-box mui-pull-left mui-text-right"></div>
+							    <div class="exper-wrap">
+							    	<div class="w-date-from mui-h5 mui-ellipsis">2014-至今</div>
+							      	<div class="w-work-type mui-h5 mui-ellipsis">前端工程师</div>
+							      	<div class="w-company mui-h5 mui-ellipsis">重邮信科</div>
+							    </div>
 						    </div>
+						</li>
+						
+						<li class="mui-table-view-cell">
+					    	<div class="mui-pull-left left-title">教育经历</div>
+					      	<div class="mui-pull-left mui-text-right add-box">
+					      		<button id="add-edu-exper" class="mui-btn mui-btn-link">
+						      		<span class="mui-icon mui-icon-plusempty"></span>
+						      		<span>添加教育经历</span>
+					      		</button>
+					      	</div>
+						</li>
+						<li class="mui-table-view-cell">
+						    <div class="mui-navigate-right">
+							    <div class="exper-wrap">
+							      	<div class="e-school mui-h5 mui-ellipsis">重邮</div>
+							    	<div class="e-date-from mui-h5 mui-ellipsis">2012年-至今</div>
+							      	<div class="e-major mui-h5 mui-ellipsis">软件</div>
+							      	<div class="e-bg mui-h5 mui-ellipsis">本科</div>
+							    </div>
+						    </div>
+						</li>
+						
+						<li class="mui-table-view-divider">爱好</li>
+						<li class="mui-table-view-cell">
+					    	<div class="mui-pull-left mui-h5" id="interest">运动、电影、书籍、音乐、食物、宠物...</div>
 						</li>
 						
 					</ul>
 				</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 				
-				
 			</div>
 		</div>
 	</div>
+	
+	<!-- 选取图片 -->
+	<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell" id="take-photo">
+				<span>拍照</span>
+			</li>
+			<li class="mui-table-view-cell" id="choose-pic">
+				<span>从相册中选取</span>
+			</li>
+		</ul>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<a href="#picture"><b>取消</b></a>
+			</li>
+		</ul>
+	</div>
+	<script src="../../js/libs/jquery.min.js"></script>
+	<script src="../../js/utils/tools.js"></script>
 	<script>
       	mui.init();
+      	mui.plusReady(function(){
+      		mui(".mui-scroll-wrapper").scroll();
+      		
+      		// 选取头像
+      		$(".choose-headimg").on("tap", function(){
+      			mui("#picture").popover("toggle");
+      		})
+      		
+      		
+      		
+      	})
     </script>
 </body>
 </html>
